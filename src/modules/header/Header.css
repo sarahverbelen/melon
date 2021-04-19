@@ -2,9 +2,11 @@
 	background-color: white;
 	padding: 15px;
 	padding-left: 140px;
+	padding-right: 140px;
 	box-shadow: 0px 3px 6px rgba(0,0,0,0.16);
 	position: sticky;
 	top: 0px;
+
 }
 
 .Header-logo {
