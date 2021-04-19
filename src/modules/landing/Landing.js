@@ -9,7 +9,7 @@ function Landing() {
 			<img src={illustration} alt=''></img>
 			<div class='innerLanding'>
 				<p>Ontdek wat sociale media met je doet en haal het meeste uit je digitale leven</p>
-				<Button label='Installeer de plugin' url='https://google.com'></Button>
+				<Button label='Installeer de plugin' url='https://google.com' position='center'></Button>
 			</div>
 		</div>
 	)

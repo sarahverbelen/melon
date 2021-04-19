@@ -7,7 +7,7 @@ function Header() {
 	return (
 		<header class='Header'>
 			<img src={logo} className="Header-logo" alt="logo" />
-			<Button label='Installeer de plugin' url='https://google.com'></Button>
+			<Button label='Installeer de plugin' url='https://google.com' position='right'></Button>
 		</header>
 	)
 }
