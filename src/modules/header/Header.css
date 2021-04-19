@@ -12,3 +12,20 @@
 .Header-logo {
 	width: 15%
 }
+
+.dashboardLink {
+	text-decoration: none;
+	color: black;
+	float: right;
+	display: block;
+	font-size: 25px;
+	width: 200px;
+	text-align: center;
+	padding: 25px;
+	box-sizing: border-box;
+	transition: 0.5s;
+}
+
+.dashboardLink:hover {
+	color: #676767;
+}

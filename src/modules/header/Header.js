@@ -7,6 +7,7 @@ function Header() {
 	return (
 		<header class='Header'>
 			<img src={logo} className="Header-logo" alt="logo" />
+			<a href='/dashboard' class='dashboardLink'>Dashboard</a>
 			<Button label='Installeer de plugin' url='https://google.com' position='right'></Button>
 		</header>
 	)
