@@ -2,6 +2,7 @@ import './App.css';
 
 import Header from './modules/header/Header';
 import Landing from './modules/landing/Landing';
+import About from './modules/about/About';
 import Footer from './modules/footer/Footer';
 
 function App() {
@@ -9,6 +10,7 @@ function App() {
     <div className="App">
       <Header />
       <Landing />
+      <About />
       <Footer />
     </div>
   );

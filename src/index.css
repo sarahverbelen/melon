@@ -1,3 +1,7 @@
+html {
+  scroll-behavior: smooth;
+}
+
 body {
   margin: 0;
   font-family: 'Corbel', sans-serif;
@@ -5,7 +9,13 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+h2 {
+  font-weight: 500;
+  font-size: 30px;
+}
+
+p {
+  font-weight: 100;
+  font-size: 22px;
+  line-height: 40px;
 }
