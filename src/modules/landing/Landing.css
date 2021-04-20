@@ -7,6 +7,7 @@
 	padding-left: 140px;
 	padding-right: 140px;
 	display: flex;
+	flex-wrap: wrap;
 	align-items: center;
 	box-shadow: 0px 3px 10px rgba(0,0,0,0.16);
 }
@@ -22,4 +23,23 @@
 	width: 40vw;
 	line-height: 100px;
 	text-align: center;
+}
+
+.navigationButtons {
+	display: block;
+	width: 100%;
+}
+
+.navigationButtons a {
+	display: inline-block;
+	color: black;
+	text-decoration: none;
+	font-size: 25px;
+	text-align: center;
+	width: 25%;
+	transition: .5s;
+}
+
+.navigationButtons a:hover {
+	color: #676767;
 }
