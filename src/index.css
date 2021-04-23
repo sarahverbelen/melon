@@ -14,8 +14,24 @@ h2 {
   font-size: 30px;
 }
 
-p {
+p, li {
   font-weight: 100;
   font-size: 22px;
   line-height: 40px;
+  list-style: none;
+  margin: 0px;
+}
+
+li::before {
+  content: '';
+  background-image: url('../src/img/list-icon.png');
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: bottom;
+  width: 30px;
+  height: 25px;
+  display: inline-block;
+  margin-bottom: -7px;
+  margin-right: 10px;
+  margin-left: -40px;
 }
