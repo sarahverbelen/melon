@@ -35,3 +35,8 @@ li::before {
   margin-right: 10px;
   margin-left: -40px;
 }
+
+.smallText {
+  font-size: 18px;
+  line-height: 25px;
+}
