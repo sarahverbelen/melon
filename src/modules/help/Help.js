@@ -17,12 +17,12 @@ import lumi from '../../img/lumi.png';
 
 function Help() {
 	return (
-		<section id='help'>
+		<section id='help' data-testid='help'>
 			<h2>Hulp nodig?</h2>
-			<div class='innerHelp'>
-				<div class='contact'>
+			<div className='innerHelp'>
+				<div className='contact' data-testid='contact'>
 					<h3>Contacteer ons</h3>
-					<ul class='contactList'>
+					<ul className='contactList'>
 						<li><img src={email} alt='email'/><a href='mailto:hello@melonproject.be'>hello@melonproject.be</a></li>
 						<li><img src={facebook} alt='facebook'/><a href='https://www.facebook.com' target='_blank' rel="noreferrer">melonproject</a></li>
 						<li><img src={instagram} alt='email'/><a href='https://www.instagram.com' target='_blank' rel="noreferrer">@melonproject</a></li>
@@ -31,9 +31,9 @@ function Help() {
 					</ul>
 				</div>
 
-				<div class='resources'>
+				<div className='resources' data-testid='resources'>
 					<h3>Ook hier kan je terecht:</h3>
-					<div class='gallery'>
+					<div className='gallery'>
 						<a href='https://www.awel.be/' target='_blank' rel="noreferrer"><img src={awel} alt='awel'/></a>
 						<a href='https://mediawijs.be/' target='_blank' rel="noreferrer"><img src={mediawijs} alt='mediawijs'/></a>
 						<a href='https://veiliginternetten.nl/' target='_blank' rel="noreferrer"><img src={veiliginternetten} alt='veiliginternetten.nl'/></a>
