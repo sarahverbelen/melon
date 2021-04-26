@@ -5,7 +5,7 @@ import Button from '../button/Button';
 
 function Landing() {
 	return (
-		<div class="Landing">
+		<section class="Landing">
 			<img src={illustration} alt=''></img>
 			<div class='innerLanding'>
 				<p>Ontdek wat sociale media met je doet en haal het meeste uit je digitale leven</p>
@@ -17,7 +17,7 @@ function Landing() {
 				<a href='#tips'>Gezond omgaan met sociale media</a>
 				<a href='#help'>Hulp nodig?</a>
 			</div>
-		</div>
+		</section>
 	)
 }
 

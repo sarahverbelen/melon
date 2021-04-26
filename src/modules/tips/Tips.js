@@ -2,7 +2,7 @@ import './Tips.css';
 
 function Tips() {
 	return (
-		<div id="tips">
+		<section id="tips">
 			<h2>Gezond omgaan met sociale media</h2>
 			<div id='tips-timeline'>
 				<div id='line'></div>
@@ -23,7 +23,7 @@ function Tips() {
 					<p class="smallText"><b>Wees kritisch.</b> Sociale media kan een ontzettend goede informatiebron zijn. Er is content van mensen uit alle lagen van de maatschappij. Maar het is belangrijk om kritisch te blijven: liegen op het internet is niet moeilijk.</p>
 				</div>
 			</div>
-		</div>
+		</section>
 	)
 }
 
