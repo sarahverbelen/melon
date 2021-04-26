@@ -5,6 +5,7 @@ import Landing from './modules/landing/Landing';
 import About from './modules/about/About';
 import Why from './modules/why/Why';
 import Tips from './modules/tips/Tips';
+import Reviews from './modules/reviews/Reviews';
 import Footer from './modules/footer/Footer';
 
 function App() {
@@ -15,6 +16,7 @@ function App() {
       <About />
       <Why />
       <Tips />
+      <Reviews />
       <Footer />
     </div>
   );

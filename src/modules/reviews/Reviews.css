@@ -1,0 +1,24 @@
+#reviews {
+	background-color: #EFEFEF;
+	height: 500px;
+	margin-bottom: 80px;
+	width: 100%;
+	box-shadow: 0px 3px 10px rgba(0,0,0,0.16), 0px -3px 10px rgba(0,0,0,0.16);
+	padding-left: 140px;
+	padding-right: 140px;
+	box-sizing: border-box;
+	display: flex;
+	align-items: flex-start;
+}
+
+.review {
+	width: 33%;
+	text-align: center;
+	padding: 20px;
+	box-sizing: border-box;
+	display: inline-block;
+}
+
+.reviewName {
+	margin-top: 20px;
+}
