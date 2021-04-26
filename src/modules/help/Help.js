@@ -17,7 +17,7 @@ import lumi from '../../img/lumi.png';
 
 function Help() {
 	return (
-		<div id='help'>
+		<section id='help'>
 			<h2>Hulp nodig?</h2>
 			<div class='innerHelp'>
 				<div class='contact'>
@@ -45,7 +45,7 @@ function Help() {
 					</div>
 				</div>
 			</div>
-		</div>
+		</section>
 	)
 }
 
