@@ -14,6 +14,11 @@ h2 {
   font-size: 30px;
 }
 
+h3 {
+  font-weight: 500;
+  font-size: 22px;
+}
+
 p, li {
   font-weight: 100;
   font-size: 22px;
@@ -22,7 +27,7 @@ p, li {
   margin: 0px;
 }
 
-li::before {
+.melonList li::before {
   content: '';
   background-image: url('../src/img/list-icon.png');
   background-size: cover;

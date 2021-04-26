@@ -1,0 +1,51 @@
+#help {
+	padding-left: 140px;
+	margin-bottom: 150px;
+	padding-right: 140px;
+}
+
+.innerHelp {
+	display: flex;
+	justify-content: space-between;
+} 
+
+.contact {
+	margin-left: 120px;
+	width: 35%;
+	display: inline-block;
+}
+
+.contactList{
+	padding: 0px;
+}
+
+.contactList img {
+	width: 60px;
+	margin-top: 10px;
+}
+
+.contactList a {
+	color: black;
+	text-decoration: none;
+	margin-left: 30px;
+	margin-bottom: 30px;
+	transition: .5s;
+	font-size: 18px;
+}
+
+.contactList a:hover {
+	color: #676767;
+}
+
+.resources {
+	margin-left: 18%;
+}
+
+.gallery {
+	display: flex;
+	flex-wrap: wrap;
+}
+
+.gallery img {
+	margin-right: 5px;
+}
