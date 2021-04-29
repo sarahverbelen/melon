@@ -4,10 +4,13 @@
 ## About
 This project was created as the Final Work of Sarah Verbelen for the bachelor Multimedia and Communication Technology during the academic year 2020-2021.
 The project is made up of a few different parts: this repository is for the React website and dashboard. The repository for the back-end API can be found [here](https://github.com/sarahverbelen/melon-api) and the repository for the plugin can be found [here](https://github.com/sarahverbelen/melon-plugin).
+
+[Firebase URL](https://melon-6ca42.web.app/)
 ## Commands
 * `yarn start`: starts a development build of the app on `http://localhost:3000`
 * `yarn build`: creates a production build of the app
 * `yarn test`: runs the test scripts
+* `yarn deploy`: creates a production build and deploys this to firebase
 
 ## Contributors
 * [**Sarah Verbelen**](sarah.verbelen@student.ehb.be): Developer 
@@ -16,3 +19,4 @@ The project is made up of a few different parts: this repository is for the Reac
 * [React](https://reactjs.org/)
 * [Stackoverflow](https://stackoverflow.com/)
 * [W3Schools](https://www.w3schools.com/)
+* [Firebase](https://firebase.google.com/)
