@@ -28,27 +28,27 @@
 }
 
 .landingStep p {
-	font-size: 30px;
+	font-size: 25px;
 	text-align: center;
 	width: 100%;
 	margin-top: 20px;
 }
 
 .landingStep img {
-	height: 250px;
+	height: 20vh;
 }
 
 .navigationButtons {
-	display: block;
+	display: flex;
 	width: 100%;
+	justify-content: space-between;
 }
 
 .navigationButtons a {
 	display: inline-block;
 	color: black;
-	font-size: 25px;
+	font-size: 22px;
 	text-align: center;
-	width: 25%;
 	transition: .5s;
 }
 

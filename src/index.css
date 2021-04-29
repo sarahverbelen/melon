@@ -11,7 +11,7 @@ body {
 
 h2 {
   font-weight: 500;
-  font-size: 30px;
+  font-size: 25px;
 }
 
 h3 {
@@ -34,7 +34,7 @@ p, li {
   background-repeat: no-repeat;
   background-position: bottom;
   width: 30px;
-  height: 25px;
+  height: 22px;
   display: inline-block;
   margin-bottom: -7px;
   margin-right: 10px;
@@ -42,6 +42,6 @@ p, li {
 }
 
 .smallText {
-  font-size: 18px;
-  line-height: 25px;
+  font-size: 15px;
+  line-height: 22px;
 }
