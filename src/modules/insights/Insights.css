@@ -1,0 +1,16 @@
+#insights {
+	width: 40%;
+	margin-left: 140px;
+	margin-top: 50px;
+	margin-bottom: 50px;
+	float: left;
+	height: 35vh;
+}
+
+.negative {
+	color: #EB6256;
+}
+
+.positive {
+	color: #59A160;
+}
