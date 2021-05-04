@@ -4,35 +4,62 @@ import React, { Component } from 'react'
 import './Graphs.css'
 
 class Graphs extends Component {
+	// CREATE THE CHARTS
 	doughnutChartRef = React.createRef();
-	barChartRef = React.createContext();
+	barChartRef = React.createRef();
+	facebookChartRef = React.createRef();
+	redditChartRef = React.createRef();
+	twitterChartRef = React.createRef();
 
 	componentDidMount() {
 		const myDoughnutChartRef = this.doughnutChartRef.current.getContext("2d");
 		const myBarChartRef = this.barChartRef.current.getContext("2d");
+		const myFacebookChartRef = this.facebookChartRef.current.getContext("2d");
+		const myRedditChartRef = this.redditChartRef.current.getContext("2d");
+		const myTwitterChartRef = this.twitterChartRef.current.getContext("2d");
+
 		createDoughnutChart([], myDoughnutChartRef);
 		createBarChart([], myBarChartRef);
+		createWebsiteChart([], myFacebookChartRef);
+		createWebsiteChart([], myRedditChartRef);
+		createWebsiteChart([], myTwitterChartRef);
 	}
 
+	// RENDER
 	render(){
 		return(
 		<section id='graphs'>
 			<h2>Grafieken</h2>
 			<div id='graphArea'>
-			<div id='perDay'>
-				<h3>Aantal berichten / dag</h3>
-				<canvas id='barChart' ref={this.barChartRef}></canvas>
-			</div>
-			<div id='total'>
-				<h3>Algemene verdeling</h3>
-				<canvas id='dougnutChart' ref={this.doughnutChartRef}></canvas>
-			</div>
+				<div id='perWebsite'>
+					<h3>Emotionele verdeling / website</h3>
+					<div id='websites'>
+						<div id='websiteFacebook'>
+							<canvas id='facebookChart' ref={this.facebookChartRef}></canvas>
+						</div>
+						<div id='websiteReddit'>
+							<canvas id='redditChart' ref={this.redditChartRef}></canvas>
+						</div>
+						<div id='websiteTwitter'>
+							<canvas id='twitterChart' ref={this.twitterChartRef}></canvas>
+						</div>
+					</div>
+				</div>
+				<div id='perDay'>
+					<h3>Aantal berichten / dag</h3>
+					<canvas id='barChart' ref={this.barChartRef}></canvas>
+				</div>
+				<div id='total'>
+					<h3>Algemene verdeling</h3>
+					<canvas id='dougnutChart' ref={this.doughnutChartRef}></canvas>
+				</div>
 			</div>
 		</section>
 		);
 	}
 }
 
+// DOUGHNUT CHART (ALGEMENE VERDELING)
 function createDoughnutChart(sentimentData, myDoughnutChartRef) {
     const data = {
         labels: [
@@ -65,6 +92,7 @@ function createDoughnutChart(sentimentData, myDoughnutChartRef) {
     );
 }
 
+// BAR CHART (AANTAL BERICHTEN PER DAG)
 function createBarChart(sentimentData, myBarChartRef) {
 	const labels = [1, 2, 3, 4, 5, 6, 7]; // TODO: figure out a way to make these dates
 	const data = {
@@ -113,6 +141,50 @@ function createBarChart(sentimentData, myBarChartRef) {
 
 	  new Chart(
         myBarChartRef,
+        config
+    );
+}
+
+// HORIZONTAL BAR CHARTS (EMOTIONELE VERDELING PER WEBSITE)
+function createWebsiteChart(sentimentData, myFacebookChartRef) {
+	const data = {
+	  labels: [''],
+	  datasets: [{
+		label: 'Positief',
+		data: [65], // TODO: fill with real data
+		backgroundColor: [
+			'rgb(89, 161, 96)'
+		],
+		borderWidth: 0
+	  },
+	  {
+		label: 'Neutraal',
+		data: [2], // TODO: fill with real data
+		backgroundColor: [
+			'rgb(103, 103, 103)'
+		],
+		borderWidth: 0
+	  },
+	  {
+		label: 'Negatief',
+		data: [25], // TODO: fill with real data
+		backgroundColor: [
+			'rgb(235, 98, 86)'
+		],
+		borderWidth: 0
+	  }]
+	};
+
+	const config = {
+		type: 'bar',
+		data: data,
+		options: {
+		  indexAxis: 'y'
+		},
+	  };
+
+	  new Chart(
+        myFacebookChartRef,
         config
     );
 }
