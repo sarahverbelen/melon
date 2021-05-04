@@ -6,13 +6,17 @@ import {
 } from "react-router-dom";
 
 import Header from './modules/header/Header';
+import Footer from './modules/footer/Footer';
+
 import Landing from './modules/landing/Landing';
 import About from './modules/about/About';
 import Why from './modules/why/Why';
 import Tips from './modules/tips/Tips';
 import Reviews from './modules/reviews/Reviews';
 import Help from './modules/help/Help';
-import Footer from './modules/footer/Footer';
+
+import Graphs from './modules/graphs/Graphs';
+
 
 function App() {
   return (
@@ -31,7 +35,8 @@ function App() {
        </Route>
        <Route path="/dashboard" exact>
           <Header dashboard={true}/>
-          <h1>Dashboard</h1>
+          <Graphs />
+          <Footer />
        </Route>
       </Switch>
     </div>
