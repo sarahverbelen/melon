@@ -1,5 +1,6 @@
 import Chart from 'chart.js/auto';
 import React, { Component } from 'react'
+import axios from 'axios';
 
 import './Graphs.css'
 
@@ -18,11 +19,21 @@ class Graphs extends Component {
 		const myRedditChartRef = this.redditChartRef.current.getContext("2d");
 		const myTwitterChartRef = this.twitterChartRef.current.getContext("2d");
 
-		createDoughnutChart([], myDoughnutChartRef);
-		createBarChart([], myBarChartRef);
-		createWebsiteChart([], myFacebookChartRef);
-		createWebsiteChart([], myRedditChartRef);
-		createWebsiteChart([], myTwitterChartRef);
+		axios({
+			method: 'get',
+			url: 'http://127.0.0.1:5000/user/608fb0824832f22bdd3542f1/record/',
+		})
+		.then(function(response) {
+			console.log(response.data);
+			createDoughnutChart(response.data, myDoughnutChartRef);
+			createBarChart(response.data, myBarChartRef);
+			createWebsiteChart(response.data, myFacebookChartRef);
+			createWebsiteChart(response.data, myRedditChartRef);
+			createWebsiteChart(response.data, myTwitterChartRef);
+		})
+		.catch(function(response) {
+			console.log(response);
+		});
 	}
 
 	// RENDER
@@ -69,8 +80,8 @@ function createDoughnutChart(sentimentData, myDoughnutChartRef) {
         ],
         datasets: [{
             label: 'sentiment',
-            // data: [sentimentData.positiveCount, sentimentData.neutralCount, sentimentData.negativeCount],
-			data: [20,30,50],
+            data: [sentimentData.positiveCount, sentimentData.neutralCount, sentimentData.negativeCount],
+			// data: [20,30,50],
             backgroundColor: [
                 'rgb(89, 161, 96)', // positive
                 'rgb(103, 103, 103)', // neutral
