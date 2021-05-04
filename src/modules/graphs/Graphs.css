@@ -29,6 +29,9 @@
 #websites div {
 	width: 25%;
 	padding: 50px;
+	display: flex;
+	box-sizing: border-box;
+	margin-right: 4vw;
 }
 
 #perDay {

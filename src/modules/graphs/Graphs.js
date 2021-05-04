@@ -4,6 +4,11 @@ import axios from 'axios';
 
 import './Graphs.css'
 
+import facebook from '../../img/facebook.svg';
+import twitter from '../../img/twitter.svg';
+import reddit from '../../img/reddit.svg';
+
+
 class Graphs extends Component {
 	// CREATE THE CHARTS
 	doughnutChartRef = React.createRef();
@@ -46,12 +51,15 @@ class Graphs extends Component {
 					<h3>Emotionele verdeling / website</h3>
 					<div id='websites'>
 						<div id='websiteFacebook'>
+							<img src={facebook} alt='facebook'/>
 							<canvas id='facebookChart' ref={this.facebookChartRef}></canvas>
 						</div>
 						<div id='websiteReddit'>
+							<img src={reddit} alt='reddit'/>
 							<canvas id='redditChart' ref={this.redditChartRef}></canvas>
 						</div>
 						<div id='websiteTwitter'>
+							<img src={twitter} alt='twitter'/>
 							<canvas id='twitterChart' ref={this.twitterChartRef}></canvas>
 						</div>
 					</div>
@@ -81,7 +89,6 @@ function createDoughnutChart(sentimentData, myDoughnutChartRef) {
         datasets: [{
             label: 'sentiment',
             data: [sentimentData.positiveCount, sentimentData.neutralCount, sentimentData.negativeCount],
-			// data: [20,30,50],
             backgroundColor: [
                 'rgb(89, 161, 96)', // positive
                 'rgb(103, 103, 103)', // neutral
@@ -162,7 +169,7 @@ function createWebsiteChart(sentimentData, myFacebookChartRef, website) {
 	  labels: [''],
 	  datasets: [{
 		label: 'Positief',
-		data: [sentimentData.websiteCount[website].positive], // TODO: fill with real data
+		data: [sentimentData.websiteCount[website].positive], 
 		backgroundColor: [
 			'rgb(89, 161, 96)'
 		],
@@ -170,7 +177,7 @@ function createWebsiteChart(sentimentData, myFacebookChartRef, website) {
 	  },
 	  {
 		label: 'Neutraal',
-		data: [sentimentData.websiteCount[website].neutral], // TODO: fill with real data
+		data: [sentimentData.websiteCount[website].neutral], 
 		backgroundColor: [
 			'rgb(103, 103, 103)'
 		],
@@ -178,7 +185,7 @@ function createWebsiteChart(sentimentData, myFacebookChartRef, website) {
 	  },
 	  {
 		label: 'Negatief',
-		data: [sentimentData.websiteCount[website].negative], // TODO: fill with real data
+		data: [sentimentData.websiteCount[website].negative], 
 		backgroundColor: [
 			'rgb(235, 98, 86)'
 		],
