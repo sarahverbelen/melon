@@ -8,18 +8,18 @@ import arrow from '../../img/arrow.svg';
 function Landing() {
 	return (
 		<section className="Landing" data-testid='landing'>
-			<div class='innerLanding'>
-			<div class='landingStep'>
+			<div className='innerLanding'>
+			<div className='landingStep'>
 			<img src={illustration1} alt='' data-testid='landingImage1' />
 			<p>Soms kan sociale media je slecht of ongelukkig doen voelen...</p>
 			</div>
-			<img src={arrow} class='arrow' alt=''/>
-			<div class='landingStep'>
+			<img src={arrow} className='arrow' alt=''/>
+			<div className='landingStep'>
 			<img src={illustration2} alt='' data-testid='landingImage2' />
 			<p>Leer aan de hand van grafieken waar de positieve en negatieve effecten van jouw sociale media liggen.</p>
 			</div>
-			<img src={arrow} class='arrow' alt=''/>
-			<div class='landingStep'>
+			<img src={arrow} className='arrow' alt=''/>
+			<div className='landingStep'>
 			<img src={illustration3} alt='' data-testid='landingImage3' />
 			<p>Zo kan je je focussen op de positieve effecten en je gelukkiger voelen!</p>
 			</div>
