@@ -27,9 +27,9 @@ class Graphs extends Component {
 			console.log(response.data);
 			createDoughnutChart(response.data, myDoughnutChartRef);
 			createBarChart(response.data, myBarChartRef);
-			createWebsiteChart(response.data, myFacebookChartRef);
-			createWebsiteChart(response.data, myRedditChartRef);
-			createWebsiteChart(response.data, myTwitterChartRef);
+			createWebsiteChart(response.data, myFacebookChartRef, 'facebook');
+			createWebsiteChart(response.data, myRedditChartRef, 'reddit');
+			createWebsiteChart(response.data, myTwitterChartRef, 'twitter');
 		})
 		.catch(function(response) {
 			console.log(response);
@@ -157,12 +157,12 @@ function createBarChart(sentimentData, myBarChartRef) {
 }
 
 // HORIZONTAL BAR CHARTS (EMOTIONELE VERDELING PER WEBSITE)
-function createWebsiteChart(sentimentData, myFacebookChartRef) {
+function createWebsiteChart(sentimentData, myFacebookChartRef, website) {
 	const data = {
 	  labels: [''],
 	  datasets: [{
 		label: 'Positief',
-		data: [65], // TODO: fill with real data
+		data: [sentimentData.websiteCount[website].positive], // TODO: fill with real data
 		backgroundColor: [
 			'rgb(89, 161, 96)'
 		],
@@ -170,7 +170,7 @@ function createWebsiteChart(sentimentData, myFacebookChartRef) {
 	  },
 	  {
 		label: 'Neutraal',
-		data: [2], // TODO: fill with real data
+		data: [sentimentData.websiteCount[website].neutral], // TODO: fill with real data
 		backgroundColor: [
 			'rgb(103, 103, 103)'
 		],
@@ -178,7 +178,7 @@ function createWebsiteChart(sentimentData, myFacebookChartRef) {
 	  },
 	  {
 		label: 'Negatief',
-		data: [25], // TODO: fill with real data
+		data: [sentimentData.websiteCount[website].negative], // TODO: fill with real data
 		backgroundColor: [
 			'rgb(235, 98, 86)'
 		],
