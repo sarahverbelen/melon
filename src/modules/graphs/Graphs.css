@@ -11,6 +11,14 @@
 	margin-top: -5vh;
 }
 
+#graphArea {
+	display: flex;
+}
+
+#perDay {
+	width: 40vw;
+}
+
 #total {
 	width: 15vw;
 }
