@@ -26,6 +26,13 @@
 	transition: 0.5s;
 }
 
-.dashboardLink:hover {
+.dashboardLink:hover, #profile {
 	color: #676767;
+}
+
+#profile {
+	float: right;
+	transition: 0.5s;
+	cursor: pointer;
+	padding: 25px;
 }

@@ -20,7 +20,7 @@ function App() {
     <div className="App">
       <Switch>
         <Route path="/" exact>
-        <Header />
+          <Header dashboard={false}/>
           <Landing />
           <About />
           <Why />
@@ -30,7 +30,8 @@ function App() {
           <Footer />
        </Route>
        <Route path="/dashboard" exact>
-         <h1>Dashboard</h1>
+          <Header dashboard={true}/>
+          <h1>Dashboard</h1>
        </Route>
       </Switch>
     </div>
