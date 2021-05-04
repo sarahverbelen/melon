@@ -5,6 +5,8 @@ import {
   Route,
 } from "react-router-dom";
 
+import ScrollToTop from './modules/scrolltotop/ScrollToTop';
+
 import Header from './modules/header/Header';
 import Footer from './modules/footer/Footer';
 
@@ -16,11 +18,12 @@ import Reviews from './modules/reviews/Reviews';
 import Help from './modules/help/Help';
 
 import Graphs from './modules/graphs/Graphs';
-
+import Insights from './modules/insights/Insights';
 
 function App() {
   return (
     <Router>
+      <ScrollToTop />
     <div className="App">
       <Switch>
         <Route path="/" exact>
@@ -31,14 +34,14 @@ function App() {
           <Tips />
           <Reviews />
           <Help />
-          <Footer />
        </Route>
        <Route path="/dashboard" exact>
           <Header dashboard={true}/>
           <Graphs />
-          <Footer />
+          <Insights />
        </Route>
       </Switch>
+      <Footer />
     </div>
     </Router>
   );
