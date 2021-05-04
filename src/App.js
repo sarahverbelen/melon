@@ -1,4 +1,9 @@
 import './App.css';
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route,
+} from "react-router-dom";
 
 import Header from './modules/header/Header';
 import Landing from './modules/landing/Landing';
@@ -11,16 +16,25 @@ import Footer from './modules/footer/Footer';
 
 function App() {
   return (
+    <Router>
     <div className="App">
-      <Header />
-      <Landing />
-      <About />
-      <Why />
-      <Tips />
-      <Reviews />
-      <Help />
-      <Footer />
+      <Switch>
+        <Route path="/" exact>
+        <Header />
+          <Landing />
+          <About />
+          <Why />
+          <Tips />
+          <Reviews />
+          <Help />
+          <Footer />
+       </Route>
+       <Route path="/dashboard" exact>
+         <h1>Dashboard</h1>
+       </Route>
+      </Switch>
     </div>
+    </Router>
   );
 }
 

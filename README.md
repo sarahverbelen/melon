@@ -20,3 +20,4 @@ The project is made up of a few different parts: this repository is for the Reac
 * [Stackoverflow](https://stackoverflow.com/)
 * [W3Schools](https://www.w3schools.com/)
 * [Firebase](https://firebase.google.com/)
+* [React Router](https://reactrouter.com/)
