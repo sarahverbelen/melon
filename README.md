@@ -21,3 +21,5 @@ The project is made up of a few different parts: this repository is for the Reac
 * [W3Schools](https://www.w3schools.com/)
 * [Firebase](https://firebase.google.com/)
 * [React Router](https://reactrouter.com/)
+* [ChartJS](https://www.chartjs.org/docs/latest/)
+* [Customizing ChartJS in React](https://blog.bitsrc.io/customizing-chart-js-in-react-2199fa81530a)
