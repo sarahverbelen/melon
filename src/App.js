@@ -19,6 +19,8 @@ import Help from './modules/help/Help';
 
 import Graphs from './modules/graphs/Graphs';
 import Insights from './modules/insights/Insights';
+import DashboardHelp from './modules/dashboardhelp/DashboardHelp';
+import Button from './modules/button/Button';
 
 function App() {
   return (
@@ -39,6 +41,8 @@ function App() {
           <Header dashboard={true}/>
           <Graphs />
           <Insights />
+          <DashboardHelp />
+          <Button label="Installeer de plugin" url="https://google.com" position="center"/>
        </Route>
       </Switch>
       <Footer />
