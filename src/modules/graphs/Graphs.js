@@ -101,7 +101,7 @@ function createDoughnutChart(sentimentData, myDoughnutChartRef) {
 
     const config = {
         type: 'doughnut',
-        data: data
+        data: data,
     }
 
     new Chart(
@@ -148,10 +148,16 @@ function createBarChart(sentimentData, myBarChartRef) {
 		  scales: {
 			y: {
 			  beginAtZero: true,
-			  stacked: true
+			  stacked: true,
+			  grid: {
+				  display: false
+			  }
 			},
 			x: {
-				stacked: true
+				stacked: true,
+				grid: {
+					display: false
+				}
 			}
 		  }
 		},
@@ -197,7 +203,20 @@ function createWebsiteChart(sentimentData, myFacebookChartRef, website) {
 		type: 'bar',
 		data: data,
 		options: {
-		  indexAxis: 'y'
+		  indexAxis: 'y',
+		  scales: {
+			y: {
+			  beginAtZero: true,
+			  grid: {
+				  display: false
+			  }
+			},
+			x: {
+				grid: {
+					display: false
+				}
+			}
+		  }
 		},
 	  };
 
