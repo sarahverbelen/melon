@@ -48,8 +48,8 @@ class Header extends React.Component {
 			return (
 				<header className='Header' data-testid='header'>
 					<Link to='/'><img src={logo} className="Header-logo" alt="logo" data-testid='logo' /></Link>
-					<Link to='/dashboard' className='dashboardLink' data-testid='dashboardLink'>Dashboard</Link>
-					<Button label='Installeer de plugin' url='https://google.com' position='right'></Button>
+					<Link to='/login' className='dashboardLink' data-testid='dashboardLink'>Inloggen of registreren</Link> {/* TODO: dynamically change to dashboard when logged in */}
+					<Button label='Installeer de plugin' url='https://google.com' position='right'  newTab={true}></Button>
 				</header>
 			)
 		}

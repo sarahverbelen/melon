@@ -45,3 +45,10 @@ p, li {
   font-size: 15px;
   line-height: 22px;
 }
+
+input {
+  padding: 10px;
+  margin-right: 20px;
+  margin-bottom: 20px;
+  margin-left: 50px;
+}

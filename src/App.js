@@ -24,6 +24,8 @@ import Button from './modules/button/Button';
 
 import Privacy from './modules/privacy/Privacy';
 
+import LoginRegister from './modules/loginRegister/LoginRegister';
+
 function App() {
   return (
     <Router>
@@ -44,7 +46,11 @@ function App() {
           <Graphs />
           <Insights />
           <DashboardHelp />
-          <Button label="Installeer de plugin" url="https://google.com" position="center"/>
+          <Button label="Installeer de plugin" url="https://google.com" position="center"  newTab={true}/>
+       </Route>
+       <Route path="/login" exact>
+        <Header dashboard={false}/>
+        <LoginRegister />
        </Route>
        <Route path="/privacy" exact>
           <Header dashboard={false}/>

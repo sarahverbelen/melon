@@ -1,0 +1,16 @@
+#loginRegister {
+	background-color: #EFEFEF;
+	padding-left: 140px;
+	padding-right: 140px;
+	margin-top: -50px;
+	padding-top: 100px;
+	padding-bottom: 50px;
+	height: 100vh;
+	display: flex;
+	width: 100%;
+	box-sizing: border-box;
+}
+
+#login, #register {
+	width: 45%;
+}
