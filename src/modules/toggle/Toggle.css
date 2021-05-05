@@ -47,7 +47,7 @@
 }
 
 .toggle-switch-inner::before {
-    content: "Yes";
+    content: "Ja";
     text-transform: uppercase;
     padding-left: 10px;
     background-color: #59A160;
@@ -65,7 +65,7 @@
 }
 
 .toggle-switch-inner::after {
-    content: "No";
+    content: "Nee";
     text-transform: uppercase;
     padding-right: 10px;
     background-color: #EB6256;

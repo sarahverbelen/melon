@@ -1,0 +1,45 @@
+#settings {
+	width: 30%;
+	background-color: #EFEFEF;
+	position: absolute;
+	right: 140px;
+	box-shadow: 3px 3px 6px rgba(0,0,0,0.16), -3px -3px 6px rgba(255,255,255,0.86);
+	box-sizing: border-box;
+	padding: 50px;
+}
+
+#greeting {
+	text-align: center;
+	margin: auto;
+}
+
+.label {
+	display: inline;
+	margin-left: 20px;
+}
+
+#websiteSettingsTitle {
+	margin-left: 0px;
+	margin-top: 20px;
+}
+
+#websiteSettings {
+	margin-left: 50px;
+}
+
+#settings a {
+	color: black;
+	font-size: 22px;
+	font-weight: 100;
+	transition: .5s;
+}
+
+#settings a:hover {
+	color: #676767;
+}
+
+
+#privacy {
+	margin-top: 40px;
+	margin-bottom: 40px;
+}
