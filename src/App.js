@@ -22,6 +22,8 @@ import Insights from './modules/insights/Insights';
 import DashboardHelp from './modules/dashboardhelp/DashboardHelp';
 import Button from './modules/button/Button';
 
+import Privacy from './modules/privacy/Privacy';
+
 function App() {
   return (
     <Router>
@@ -43,6 +45,10 @@ function App() {
           <Insights />
           <DashboardHelp />
           <Button label="Installeer de plugin" url="https://google.com" position="center"/>
+       </Route>
+       <Route path="/privacy" exact>
+          <Header dashboard={false}/>
+          <Privacy />
        </Route>
       </Switch>
       <Footer />

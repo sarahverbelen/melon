@@ -25,3 +25,4 @@ The project is made up of a few different parts: this repository is for the Reac
 * [Customizing ChartJS in React](https://blog.bitsrc.io/customizing-chart-js-in-react-2199fa81530a)
 * [Axios](https://github.com/axios/axios)
 * [Sitepoint](https://www.sitepoint.com/)
+* [Privacyverklaring generator](https://veiliginternetten.nl/privacyverklaring-generator/start/)
