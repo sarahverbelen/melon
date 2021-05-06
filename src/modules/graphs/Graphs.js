@@ -81,10 +81,9 @@ class Graphs extends Component {
 
 		axios({
 			method: 'get',
-			url: 'http://127.0.0.1:5000/user/608fb0824832f22bdd3542f1/record/?week=true'
+			url: 'http://127.0.0.1:5000/user/608fb0824832f22bdd3542f1/record/?time=week'
 		})
 		.then(function(response) {
-			console.log(response.data);
 			this.createBarChart(response.data, myBarChartRef);
 		}.bind(this))
 		.catch(function(response) {
