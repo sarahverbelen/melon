@@ -13,7 +13,7 @@ class Graphs extends Component {
 	constructor(props) {
 		super(props);
 		this.state = {
-			filter: ''
+			filter: 'today'
 		}
 
 		this.handleFilter = this.handleFilter.bind(this);
@@ -57,14 +57,12 @@ class Graphs extends Component {
 			queryString = 'month=' + (today.getMonth() + 1)
 		}
 
-		console.log(queryString);
-
 		axios({
 			method: 'get',
 			url: 'http://127.0.0.1:5000/user/608fb0824832f22bdd3542f1/record/?' + queryString,
 		})
 		.then(function(response) {
-			console.log(response.data);
+			// console.log(response.data);
 			this.createDoughnutChart(response.data, myDoughnutChartRef);
 			this.createBarChart(response.data, myBarChartRef);
 			this.createWebsiteChart(response.data, myFacebookChartRef, 'facebook', this.facebookChart);
@@ -77,10 +75,11 @@ class Graphs extends Component {
 	}
 
 	handleFilter() {
-		this.setState({filter: document.getElementById("filter").value});
-		console.log(this.state.filter);
-		this.clearCharts();
-		this.getResults();
+		this.setState({filter: document.getElementById("filter").value}, () => {
+			console.log(this.state.filter);
+			this.clearCharts();
+			this.getResults();
+		});
 	}
 
 	clearCharts() {
@@ -96,7 +95,7 @@ class Graphs extends Component {
 		return(
 		<section id='graphs'>
 			<h2>Grafieken</h2>
-			<select name="filter" id="filter" onChange={this.handleFilter}>
+			<select name="filter" id="filter" onChange={this.handleFilter} value={this.state.filter}>
 						<option value='today'>Vandaag</option>
 						<option value='month'>Deze maand</option>
 						<option value='year'>Dit jaar</option>
