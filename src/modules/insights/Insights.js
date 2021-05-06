@@ -10,7 +10,10 @@ class Insights extends React.Component {
 		this.state = {
 			mostNegative: '',
 			mostNeutral: '',
-			mostPositive: ''
+			mostPositive: '',
+			facebookSentiment: '',
+			redditSentiment: '',
+			twitterSentiment: '',
 		}
 
 		this.calculateInsights = this.calculateInsights.bind(this);
@@ -25,11 +28,12 @@ class Insights extends React.Component {
 			<section id='insights'>
 				<h2>Inzichten</h2>
 				<ul className='melonList'>
-					<li>De meeste <span className='negative'>negatieve</span> berichten komen van {this.state.mostNegative}</li>
-					<li>De meeste <span className='positive'>positieve</span> berichten komen van {this.state.mostPositive}</li>
-					<li>De meeste <span className='neutral'>neutrale</span> berichten komen van {this.state.mostNeutral}</li>
-					<li>De meeste berichten over Covid zijn <span className='negative'>negatief</span></li>
-					<li>De meeste berichten over katten zijn <span className='positive'>positief</span></li>
+					<li>De meeste <span className='negatief'>negatieve</span> berichten komen van {this.state.mostNegative}</li>
+					<li>De meeste <span className='positief'>positieve</span> berichten komen van {this.state.mostPositive}</li>
+					<li>De meeste <span className='neutraal'>neutrale</span> berichten komen van {this.state.mostNeutral}</li>
+					<li>De meeste berichten op Facebook zijn <span className={this.state.facebookSentiment}>{this.state.facebookSentiment}</span></li>
+					<li>De meeste berichten op Reddit zijn <span className={this.state.redditSentiment}>{this.state.redditSentiment}</span></li>
+					<li>De meeste berichten op Twitter zijn <span className={this.state.twitterSentiment}>{this.state.twitterSentiment}</span></li>
 				</ul>
 			</section>
 		);
@@ -48,12 +52,31 @@ class Insights extends React.Component {
 			this.setState({
 				mostNegative: this.calculateHighestWebsite('negative', data),
 				mostPositive: this.calculateHighestWebsite('positive', data),
-				mostNeutral: this.calculateHighestWebsite('neutral', data)
+				mostNeutral: this.calculateHighestWebsite('neutral', data),
+				facebookSentiment: this.calculateHighestSentiment('facebook', data),
+				twitterSentiment: this.calculateHighestSentiment('twitter', data),
+				redditSentiment: this.calculateHighestSentiment('reddit', data),
 			})
 		}.bind(this))
 		.catch(function(response) {
 			console.log(response);
 		});
+	}
+
+	calculateHighestSentiment(website, data) {
+		let result = 'neutraal';
+
+		if (data[website].positive >= data[website].neutral) {
+			if (data[website].positive >= data[website].negative) {
+				result = 'positief';
+			} else if (data[website].negative >= data[website].positive) {
+				result = 'negatief';
+			}
+		} else if (data[website].negative >= data[website].neutral) {
+			result = 'negatief';
+		}
+
+		return result;
 	}
 
 	calculateHighestWebsite(sentiment, data) {
