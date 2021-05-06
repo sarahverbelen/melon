@@ -94,12 +94,14 @@ class Graphs extends Component {
 	render(){
 		return(
 		<section id='graphs'>
-			<h2>Grafieken</h2>
-			<select name="filter" id="filter" onChange={this.handleFilter} value={this.state.filter}>
-						<option value='today'>Vandaag</option>
-						<option value='month'>Deze maand</option>
-						<option value='year'>Dit jaar</option>
-					</select>
+			<div id='graphTop'>
+				<h2>Grafieken</h2>
+				<select name="filter" id="filter" onChange={this.handleFilter} value={this.state.filter}>
+					<option value='today'>Vandaag</option>
+					<option value='month'>Deze maand</option>
+					<option value='year'>Dit jaar</option>
+				</select>
+			</div>
 			<div id='graphArea'>
 				<div id='perWebsite'>
 					<h3>Emotionele verdeling / website</h3>

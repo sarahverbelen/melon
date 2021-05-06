@@ -47,3 +47,13 @@
 #perDay h3, #total h3 {
 	margin-left: -50px;
 }
+
+#graphTop {
+	display: flex;
+	align-items: center;
+}
+
+#filter {
+	height: 20px;
+	margin-left: 50px;
+}
