@@ -54,7 +54,9 @@ class Graphs extends Component {
 		if (this.state.filter === 'today') {
 			queryString = '';
 		} else if (this.state.filter === 'month') {
-			queryString = 'month=' + (today.getMonth() + 1)
+			queryString = 'month=' + (today.getMonth() + 1);
+		} else if (this.state.filter === 'year') {
+			queryString = 'year=' + today.getFullYear();
 		}
 
 		axios({
@@ -62,7 +64,6 @@ class Graphs extends Component {
 			url: 'http://127.0.0.1:5000/user/608fb0824832f22bdd3542f1/record/?' + queryString,
 		})
 		.then(function(response) {
-			// console.log(response.data);
 			this.createDoughnutChart(response.data, myDoughnutChartRef);
 			this.createBarChart(response.data, myBarChartRef);
 			this.createWebsiteChart(response.data, myFacebookChartRef, 'facebook', this.facebookChart);
@@ -76,7 +77,6 @@ class Graphs extends Component {
 
 	handleFilter() {
 		this.setState({filter: document.getElementById("filter").value}, () => {
-			console.log(this.state.filter);
 			this.clearCharts();
 			this.getResults();
 		});
