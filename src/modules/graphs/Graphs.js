@@ -100,7 +100,6 @@ class Graphs extends Component {
 
 	clearCharts() {
 		this.doughnutChart.destroy();
-		this.barChart.destroy();
 		this.facebookChart.destroy();
 		this.redditChart.destroy();
 		this.twitterChart.destroy();
@@ -183,16 +182,23 @@ class Graphs extends Component {
 
 	// BAR CHART (AANTAL BERICHTEN PER DAG)
 	createBarChart(sentimentData, myBarChartRef) {
+		const perDayCount = Object.keys(sentimentData.perDayCount).sort().reduce(
+			(obj, key) => { 
+			  obj[key] = sentimentData.perDayCount[key]; 
+			  return obj;
+			}, 
+			{}
+		  );
 		const labels = [];
 		const dataPositive = [];
 		const dataNegative = [];
 		const dataNeutral = [];
 
-		for (const day in sentimentData.perDayCount) {
+		for (const day in perDayCount) {
 			labels.push(day);
-			dataPositive.push(sentimentData.perDayCount[day].positive);
-			dataNegative.push(sentimentData.perDayCount[day].negative);
-			dataNeutral.push(sentimentData.perDayCount[day].neutral);
+			dataPositive.push(perDayCount[day].positive);
+			dataNegative.push(perDayCount[day].negative);
+			dataNeutral.push(perDayCount[day].neutral);
 		}
 
 		const data = {
