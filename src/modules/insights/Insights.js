@@ -82,17 +82,39 @@ class Insights extends React.Component {
 	calculateHighestWebsite(sentiment, data) {
 		let result = 'Facebook';
 
-		if (data.reddit[sentiment] >= data.facebook[sentiment]) {
-			if (data.reddit[sentiment] >= data.twitter[sentiment]) {
+		//first, we want to calculate the percentages
+		let facebook = this.calculateWebsitePercentages(data, 'facebook');
+		let reddit = this.calculateWebsitePercentages(data, 'reddit');
+		let twitter = this.calculateWebsitePercentages(data, 'twitter');
+
+
+		console.log(facebook, reddit, twitter)
+
+		if (reddit[sentiment] >= facebook[sentiment]) {
+			if (reddit[sentiment] >= twitter[sentiment]) {
 				result = 'Reddit';
-			} else if (data.twitter[sentiment] >= data.reddit[sentiment]) {
+			} else if (twitter[sentiment] >= reddit[sentiment]) {
 				result = 'Twitter';
 			}
-		} else if (data.twitter[sentiment] >= data.facebook[sentiment]) {
+		} else if (twitter[sentiment] >= facebook[sentiment]) {
 			result = 'Twitter';
 		}
 
 		return result;
+	}
+
+	calculateWebsitePercentages(data, website) {
+		return {
+			positive: this.calculatePercent(data[website], 'positive'),
+			negative: this.calculatePercent(data[website], 'negative'),
+			neutral: this.calculatePercent(data[website], 'neutral'),
+		}
+	}
+
+	calculatePercent(data, sentiment) {
+		let total = data.positive + data.negative + data.neutral;
+		let percent = (data[sentiment] / total) * 100;
+		return percent;
 	}
 
 }
