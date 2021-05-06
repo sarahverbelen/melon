@@ -18,6 +18,7 @@ class Graphs extends Component {
 
 		this.handleFilter = this.handleFilter.bind(this);
 		this.getResults = this.getResults.bind(this);
+		this.getWeekResults = this.getWeekResults.bind(this);
 
 		this.createDoughnutChart = this.createDoughnutChart.bind(this);
 		this.createBartChart = this.createBarChart.bind(this);
@@ -39,11 +40,11 @@ class Graphs extends Component {
 
 	componentDidMount() {
 		this.getResults();
+		this.getWeekResults();
 	}
 
 	getResults() {
 		const myDoughnutChartRef = this.doughnutChartRef.current.getContext("2d");
-		const myBarChartRef = this.barChartRef.current.getContext("2d");
 		const myFacebookChartRef = this.facebookChartRef.current.getContext("2d");
 		const myRedditChartRef = this.redditChartRef.current.getContext("2d");
 		const myTwitterChartRef = this.twitterChartRef.current.getContext("2d");
@@ -65,10 +66,25 @@ class Graphs extends Component {
 		})
 		.then(function(response) {
 			this.createDoughnutChart(response.data, myDoughnutChartRef);
-			this.createBarChart(response.data, myBarChartRef);
 			this.createWebsiteChart(response.data, myFacebookChartRef, 'facebook', this.facebookChart);
 			this.createWebsiteChart(response.data, myRedditChartRef, 'reddit', this.redditChart);
 			this.createWebsiteChart(response.data, myTwitterChartRef, 'twitter', this.twitterChart);
+		}.bind(this))
+		.catch(function(response) {
+			console.log(response);
+		});
+	}
+
+	getWeekResults() {
+		const myBarChartRef = this.barChartRef.current.getContext("2d");
+
+		axios({
+			method: 'get',
+			url: 'http://127.0.0.1:5000/user/608fb0824832f22bdd3542f1/record/?week=true'
+		})
+		.then(function(response) {
+			console.log(response.data);
+			this.createBarChart(response.data, myBarChartRef);
 		}.bind(this))
 		.catch(function(response) {
 			console.log(response);
@@ -167,12 +183,23 @@ class Graphs extends Component {
 
 	// BAR CHART (AANTAL BERICHTEN PER DAG)
 	createBarChart(sentimentData, myBarChartRef) {
-		const labels = [1, 2, 3, 4, 5, 6, 7]; // TODO: figure out a way to make these dates
+		const labels = [];
+		const dataPositive = [];
+		const dataNegative = [];
+		const dataNeutral = [];
+
+		for (const day in sentimentData.perDayCount) {
+			labels.push(day);
+			dataPositive.push(sentimentData.perDayCount[day].positive);
+			dataNegative.push(sentimentData.perDayCount[day].negative);
+			dataNeutral.push(sentimentData.perDayCount[day].neutral);
+		}
+
 		const data = {
 		labels: labels,
 		datasets: [{
 			label: 'Positief',
-			data: [65, 59, 80, 81, 56, 55, 40], // TODO: fill with real data
+			data: dataPositive,
 			backgroundColor: [
 				'rgb(89, 161, 96)'
 			],
@@ -180,7 +207,7 @@ class Graphs extends Component {
 		},
 		{
 			label: 'Neutraal',
-			data: [2, 10, 30, 5, 80, 15, 3], // TODO: fill with real data
+			data: dataNeutral,
 			backgroundColor: [
 				'rgb(103, 103, 103)'
 			],
@@ -188,7 +215,7 @@ class Graphs extends Component {
 		},
 		{
 			label: 'Negatief',
-			data: [25, 45, 0, 72, 30, 25, 39], // TODO: fill with real data
+			data: dataNegative,
 			backgroundColor: [
 				'rgb(235, 98, 86)'
 			],
