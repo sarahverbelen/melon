@@ -56,4 +56,13 @@
 #filter {
 	height: 20px;
 	margin-left: 50px;
+	display: flex;
+	align-items: center;
+
+}
+
+.timeArrow {
+	margin: 10px;
+	width: 10px;
+	height: 17px;
 }

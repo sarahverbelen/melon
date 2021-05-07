@@ -8,17 +8,27 @@ import facebook from '../../img/facebook.svg';
 import twitter from '../../img/twitter.svg';
 import reddit from '../../img/reddit.svg';
 
+import arrowLeftRed from '../../img/arrow-left-red.png';
+import arrowRightRed from '../../img/arrow-right-red.png';
+import arrowRightGrey from '../../img/arrow-right-grey.png';
 
 class Graphs extends Component {
 	constructor(props) {
 		super(props);
 		this.state = {
-			filter: 'today'
+			filter: 'day',
+			day: 'Vandaag',
+			month: 'Deze maand',
+			year: 'Dit jaar',
+			stepsBack: '0',
+			arrowRight: arrowRightGrey
 		}
 
 		this.handleFilter = this.handleFilter.bind(this);
 		this.getResults = this.getResults.bind(this);
 		this.getWeekResults = this.getWeekResults.bind(this);
+		this.mainSkip = this.mainSkip.bind(this);
+		this.continueFunction = this.continueFunction.bind(this);
 
 		this.createDoughnutChart = this.createDoughnutChart.bind(this);
 		this.createBartChart = this.createBarChart.bind(this);
@@ -53,8 +63,11 @@ class Graphs extends Component {
 		let queryString = '';
 		let today = new Date();
 
-		if (this.state.filter === 'today') {
+		if (this.state.filter === 'day' && this.state.day === 'Vandaag') {
 			queryString = '';
+		} if (this.state.filter === 'day' && this.state.day !== 'Vandaag') {
+			let date = this.state.day.split('/');
+			queryString = `day=${date[0]}&month=${date[1]}`
 		} else if (this.state.filter === 'month') {
 			queryString = 'month=' + (today.getMonth() + 1);
 		} else if (this.state.filter === 'year') {
@@ -92,7 +105,7 @@ class Graphs extends Component {
 	}
 
 	handleFilter() {
-		this.setState({filter: document.getElementById("filter").value}, () => {
+		this.setState({filter: document.getElementById("filterSelect").value}, () => {
 			// if the filter was changed, we need to set the new filter and then rerender the graphs
 			this.clearCharts();
 			this.getResults();
@@ -112,11 +125,15 @@ class Graphs extends Component {
 		<section id='graphs'>
 			<div id='graphTop'>
 				<h2>Grafieken</h2>
-				<select name="filter" id="filter" onChange={this.handleFilter} value={this.state.filter}>
-					<option value='today'>Vandaag</option>
-					<option value='month'>Deze maand</option>
-					<option value='year'>Dit jaar</option>
-				</select>
+				<div id='filter'>
+					<img src={arrowLeftRed} alt='terug' className='timeArrow' onClick={() => {this.mainSkip(-1)}}/>
+					<select name="filter" id='filterSelect' onChange={this.handleFilter} value={this.state.filter}>
+						<option value='day'>{this.state.day}</option>
+						<option value='month'>{this.state.month}</option>
+						<option value='year'>{this.state.year}</option>
+					</select>
+					<img src={this.state.arrowRight} alt='verder' className='timeArrow' onClick={this.continueFunction}/>
+				</div>
 			</div>
 			<div id='graphArea'>
 				<div id='perWebsite'>
@@ -147,6 +164,40 @@ class Graphs extends Component {
 			</div>
 		</section>
 		);
+	}
+
+	continueFunction () {
+		if(this.state.arrowRight === arrowRightRed) {
+			this.mainSkip(1);
+		}  
+	}
+
+	mainSkip (direction) {
+		this.setState(prevState => {
+			return {
+				stepsBack: parseInt(prevState.stepsBack) - direction,
+				arrowRight: arrowRightRed
+			}
+		 }, () => {
+			if (this.state.filter === 'day') {
+				const date = new Date();
+				let day = 'Vandaag'
+				if(this.state.stepsBack === 0) {
+					this.setState({
+						arrowRight: arrowRightGrey
+					});
+				} else {
+					date.setDate(date.getDate() - this.state.stepsBack);
+					day = date.getDate() + '/' + (date.getMonth() + 1);
+				}
+				this.setState({
+					day: day
+				}, () => {
+					this.clearCharts();
+					this.getResults();
+				});
+			}
+		 });
 	}
 
 	// DOUGHNUT CHART (ALGEMENE VERDELING)

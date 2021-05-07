@@ -87,9 +87,6 @@ class Insights extends React.Component {
 		let reddit = this.calculateWebsitePercentages(data, 'reddit');
 		let twitter = this.calculateWebsitePercentages(data, 'twitter');
 
-
-		console.log(facebook, reddit, twitter)
-
 		if (reddit[sentiment] >= facebook[sentiment]) {
 			if (reddit[sentiment] >= twitter[sentiment]) {
 				result = 'Reddit';
