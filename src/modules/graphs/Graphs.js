@@ -17,11 +17,13 @@ class Graphs extends Component {
 		super(props);
 		this.state = {
 			filter: 'day',
-			day: 'Vandaag',
-			month: 'Deze maand',
-			year: 'Dit jaar',
+			day: (new Date()).getDate() + '/' + ((new Date()).getMonth() + 1),
+			month: (new Date()).toLocaleString('default', { month: 'long' }),
+			monthNr: (new Date()).getMonth() + 1,
+			year: (new Date()).getUTCFullYear(),
 			stepsBack: '0',
-			arrowRight: arrowRightGrey
+			arrowRight: arrowRightGrey,
+			arrowWeekRight: arrowRightGrey
 		}
 
 		this.handleFilter = this.handleFilter.bind(this);
@@ -63,15 +65,13 @@ class Graphs extends Component {
 		let queryString = '';
 		let today = new Date();
 
-		if (this.state.filter === 'day' && this.state.day === 'Vandaag') {
-			queryString = '';
-		} if (this.state.filter === 'day' && this.state.day !== 'Vandaag') {
+		if (this.state.filter === 'day') {
 			let date = this.state.day.split('/');
 			queryString = `day=${date[0]}&month=${date[1]}`
 		} else if (this.state.filter === 'month') {
-			queryString = 'month=' + (today.getMonth() + 1);
+			queryString = `month=${this.state.monthNr}&year=${this.state.year}`;
 		} else if (this.state.filter === 'year') {
-			queryString = 'year=' + today.getFullYear();
+			queryString = `year=${this.state.year}`;
 		}
 
 		axios({
@@ -105,8 +105,16 @@ class Graphs extends Component {
 	}
 
 	handleFilter() {
-		this.setState({filter: document.getElementById("filterSelect").value}, () => {
-			// if the filter was changed, we need to set the new filter and then rerender the graphs
+		this.setState({
+			filter: document.getElementById("filterSelect").value,
+			day: (new Date()).getDate() + '/' + ((new Date()).getMonth() + 1),
+			month: (new Date()).toLocaleString('default', { month: 'long' }),
+			monthNr: (new Date()).getMonth() + 1,
+			year: (new Date()).getUTCFullYear(),
+			stepsBack: '0',
+			arrowRight: arrowRightGrey,
+		}, () => {
+			// if the filter was changed set the new filter and then rerender the graphs
 			this.clearCharts();
 			this.getResults();
 		});
@@ -156,6 +164,8 @@ class Graphs extends Component {
 				<div id='perDay'>
 					<h3>Aantal berichten / dag</h3>
 					<canvas id='barChart' ref={this.barChartRef}></canvas>
+					<img src={arrowLeftRed} alt='terug' className='timeArrow' onClick={() => {this.weekSkip(-1)}}/>
+					<img src={this.state.weekArrowRight} alt='verder' className='timeArrow' onClick={this.continueWeekFunction}/>
 				</div>
 				<div id='total'>
 					<h3>Algemene verdeling</h3>
@@ -172,6 +182,12 @@ class Graphs extends Component {
 		}  
 	}
 
+	continueWeekFunction () {
+		if(this.state.arrowWeekRight === arrowRightRed) {
+			this.weekSkip(1);
+		}  
+	}
+
 	mainSkip (direction) {
 		this.setState(prevState => {
 			return {
@@ -181,17 +197,47 @@ class Graphs extends Component {
 		 }, () => {
 			if (this.state.filter === 'day') {
 				const date = new Date();
-				let day = 'Vandaag'
 				if(this.state.stepsBack === 0) {
 					this.setState({
 						arrowRight: arrowRightGrey
 					});
 				} else {
 					date.setDate(date.getDate() - this.state.stepsBack);
-					day = date.getDate() + '/' + (date.getMonth() + 1);
 				}
 				this.setState({
-					day: day
+					day: date.getDate() + '/' + (date.getMonth() + 1)
+				}, () => {
+					this.clearCharts();
+					this.getResults();
+				});
+			} else if (this.state.filter === 'month') {
+				const date = new Date();
+				if(this.state.stepsBack === 0) {
+					this.setState({
+						arrowRight: arrowRightGrey
+					});
+				} else {
+					date.setMonth(date.getMonth() - this.state.stepsBack);
+				}
+				this.setState({
+					month: date.toLocaleString('default', { month: 'long' }),
+					monthNr: date.getMonth() + 1,
+					year: date.getFullYear()
+				}, () => {
+					this.clearCharts();
+					this.getResults();
+				});
+			} else if (this.state.filter === 'year') {
+				const date = new Date();
+				if(this.state.stepsBack === 0) {
+					this.setState({
+						arrowRight: arrowRightGrey
+					});
+				} else {
+					date.setFullYear(date.getFullYear() - this.state.stepsBack);
+				}
+				this.setState({
+					year: date.getFullYear()
 				}, () => {
 					this.clearCharts();
 					this.getResults();
