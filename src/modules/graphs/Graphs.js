@@ -22,6 +22,7 @@ class Graphs extends Component {
 			monthNr: (new Date()).getMonth() + 1,
 			year: (new Date()).getUTCFullYear(),
 			stepsBack: '0',
+			weekStepsBack: 0,
 			arrowRight: arrowRightGrey,
 			arrowWeekRight: arrowRightGrey
 		}
@@ -30,7 +31,9 @@ class Graphs extends Component {
 		this.getResults = this.getResults.bind(this);
 		this.getWeekResults = this.getWeekResults.bind(this);
 		this.mainSkip = this.mainSkip.bind(this);
+		this.weekSkip = this.weekSkip.bind(this);
 		this.continueFunction = this.continueFunction.bind(this);
+		this.continueWeekFunction = this.continueWeekFunction.bind(this);
 
 		this.createDoughnutChart = this.createDoughnutChart.bind(this);
 		this.createBartChart = this.createBarChart.bind(this);
@@ -63,7 +66,6 @@ class Graphs extends Component {
 
 		// FILTERS
 		let queryString = '';
-		let today = new Date();
 
 		if (this.state.filter === 'day') {
 			let date = this.state.day.split('/');
@@ -94,9 +96,10 @@ class Graphs extends Component {
 
 		axios({
 			method: 'get',
-			url: 'http://127.0.0.1:5000/user/608fb0824832f22bdd3542f1/record/?time=week'
+			url: `http://127.0.0.1:5000/user/608fb0824832f22bdd3542f1/record/?time=week&pastweek=${this.state.weekStepsBack}`
 		})
 		.then(function(response) {
+			console.log(response.data)
 			this.createBarChart(response.data, myBarChartRef);
 		}.bind(this))
 		.catch(function(response) {
@@ -125,6 +128,10 @@ class Graphs extends Component {
 		this.facebookChart.destroy();
 		this.redditChart.destroy();
 		this.twitterChart.destroy();
+	}
+
+	clearWeekChart() {
+		this.barChart.destroy();
 	}
 
 	// RENDER
@@ -165,7 +172,7 @@ class Graphs extends Component {
 					<h3>Aantal berichten / dag</h3>
 					<canvas id='barChart' ref={this.barChartRef}></canvas>
 					<img src={arrowLeftRed} alt='terug' className='timeArrow' onClick={() => {this.weekSkip(-1)}}/>
-					<img src={this.state.weekArrowRight} alt='verder' className='timeArrow' onClick={this.continueWeekFunction}/>
+					<img src={this.state.arrowWeekRight} alt='verder' className='timeArrow' onClick={this.continueWeekFunction}/>
 				</div>
 				<div id='total'>
 					<h3>Algemene verdeling</h3>
@@ -186,6 +193,23 @@ class Graphs extends Component {
 		if(this.state.arrowWeekRight === arrowRightRed) {
 			this.weekSkip(1);
 		}  
+	}
+
+	weekSkip(direction) {
+		this.setState(prevState => {
+			return {
+				weekStepsBack: parseInt(prevState.weekStepsBack) - direction,
+				arrowWeekRight: arrowRightRed
+			}
+		 }, () => {
+				if(this.state.weekStepsBack === 0) {
+					this.setState({
+						arrowWeekRight: arrowRightGrey
+					});
+				} 
+				this.clearWeekChart();
+				this.getWeekResults();
+		 });
 	}
 
 	mainSkip (direction) {
