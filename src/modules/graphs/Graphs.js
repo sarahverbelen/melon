@@ -1,6 +1,7 @@
 import Chart from 'chart.js/auto';
-import React, { Component } from 'react'
+import React, { Component } from 'react';
 import axios from 'axios';
+import { read_cookie } from 'sfcookies';
 
 import './Graphs.css'
 
@@ -78,7 +79,8 @@ class Graphs extends Component {
 
 		axios({
 			method: 'get',
-			url: 'http://127.0.0.1:5000/user/608fb0824832f22bdd3542f1/record/?' + queryString,
+			url: 'http://127.0.0.1:5000/record/?' + queryString,
+			headers: {'Authorization': read_cookie('auth_token')}
 		})
 		.then(function(response) {
 			this.createDoughnutChart(response.data, myDoughnutChartRef);
@@ -96,7 +98,8 @@ class Graphs extends Component {
 
 		axios({
 			method: 'get',
-			url: `http://127.0.0.1:5000/user/608fb0824832f22bdd3542f1/record/?time=week&pastweek=${this.state.weekStepsBack}`
+			url: `http://127.0.0.1:5000/record/?time=week&pastweek=${this.state.weekStepsBack}`,
+			headers: {'Authorization': read_cookie('auth_token')}
 		})
 		.then(function(response) {
 			console.log(response.data)
