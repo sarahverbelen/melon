@@ -29,7 +29,7 @@ class Login extends React.Component {
 				<form>
 				<input type='email' id='loginEmail' name='email' value={this.state.email} onChange={this.handleInputChange} autoComplete='email'></input> <label htmlFor='loginEmail'>Email</label> <br />
 				<input type='password' id='loginPassword' name='password' value={this.state.password} onChange={this.handleInputChange} autoComplete='current-password'></input> <label htmlFor='loginPassword'>Wachtwoord</label> <br />
-				<Button label="Login" position="center" newTab={false} onClick={this.handleLogin}/> {/* TODO: solve bug where you have to double click? */}
+				<Button label="Login" position="center" newTab={false} onClick={this.handleLogin}/> 
 				</form>
 			</div>
 		)
@@ -47,7 +47,6 @@ class Login extends React.Component {
 
 	handleLogin(e) {
 		e.preventDefault();
-		console.log(this.state.email, this.state.password)
 
 		let formData = new FormData();
 		formData.append('email', this.state.email)
