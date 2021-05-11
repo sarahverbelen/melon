@@ -55,6 +55,11 @@ class Graphs extends Component {
 	twitterChart;
 
 	componentDidMount() {
+		// CHECK IF USER IS LOGGED IN, otherwise redirect to login page
+		if (!read_cookie('loggedIn')) {
+			window.location = '/login';
+		}
+		// if the user is logged in, get the results
 		this.getResults();
 		this.getWeekResults();
 	}
