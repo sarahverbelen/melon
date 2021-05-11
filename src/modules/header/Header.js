@@ -22,7 +22,7 @@ class Header extends React.Component {
 	}
 
 	componentDidMount() {
-		if (read_cookie('loggedIn')) {
+		if (read_cookie('loggedIn') === true) {
 			this.setState({
 				loginLink: <Link to='/dashboard' className='dashboardLink' data-testid='dashboardLink'>Dashboard</Link>
 			})

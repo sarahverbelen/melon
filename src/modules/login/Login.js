@@ -19,7 +19,7 @@ class Login extends React.Component {
 	}
 
 	componentDidMount() {
-		if (read_cookie('loggedIn')) {
+		if (read_cookie('loggedIn') === true) {
 			window.location = '/dashboard';
 		}
 	}
@@ -31,7 +31,7 @@ class Login extends React.Component {
 				<form>
 				<input type='email' id='loginEmail' name='email' value={this.state.email} onChange={this.handleInputChange} autoComplete='email'></input> <label htmlFor='loginEmail'>Email</label> <br />
 				<input type='password' id='loginPassword' name='password' value={this.state.password} onChange={this.handleInputChange} autoComplete='current-password'></input> <label htmlFor='loginPassword'>Wachtwoord</label> <br />
-				<Button label="Login" position="center" newTab={false} onClick={this.handleLogin}/> {/* TODO: login */}
+				<Button label="Login" position="center" newTab={false} onClick={this.handleLogin}/> {/* TODO: solve bug where you have to double click? */}
 				</form>
 			</div>
 		)

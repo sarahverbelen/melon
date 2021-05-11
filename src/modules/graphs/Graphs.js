@@ -56,7 +56,7 @@ class Graphs extends Component {
 
 	componentDidMount() {
 		// CHECK IF USER IS LOGGED IN, otherwise redirect to login page
-		if (!read_cookie('loggedIn')) {
+		if (!(read_cookie('loggedIn') === true)) {
 			window.location = '/login';
 		}
 		// if the user is logged in, get the results
