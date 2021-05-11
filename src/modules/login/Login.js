@@ -3,8 +3,6 @@ import Button from '../button/Button';
 import axios from 'axios';
 import { bake_cookie, read_cookie } from 'sfcookies';
 
-import './Login.css';
-
 class Login extends React.Component {
 	constructor(props) {
 		super(props);
