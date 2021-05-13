@@ -10,7 +10,6 @@ class Insights extends React.Component {
 
 		this.state = {
 			mostNegative: '',
-			mostNeutral: '',
 			mostPositive: '',
 			facebookSentiment: '',
 			redditSentiment: '',
@@ -31,7 +30,6 @@ class Insights extends React.Component {
 				<ul className='melonList'>
 					<li>De meeste <span className='negatief'>negatieve</span> berichten komen van {this.state.mostNegative}</li>
 					<li>De meeste <span className='positief'>positieve</span> berichten komen van {this.state.mostPositive}</li>
-					<li>De meeste <span className='neutraal'>neutrale</span> berichten komen van {this.state.mostNeutral}</li>
 					<li>De meeste berichten op Facebook zijn <span className={this.state.facebookSentiment}>{this.state.facebookSentiment}</span></li>
 					<li>De meeste berichten op Reddit zijn <span className={this.state.redditSentiment}>{this.state.redditSentiment}</span></li>
 					<li>De meeste berichten op Twitter zijn <span className={this.state.twitterSentiment}>{this.state.twitterSentiment}</span></li>
@@ -54,7 +52,6 @@ class Insights extends React.Component {
 			this.setState({
 				mostNegative: this.calculateHighestWebsite('negative', data),
 				mostPositive: this.calculateHighestWebsite('positive', data),
-				mostNeutral: this.calculateHighestWebsite('neutral', data),
 				facebookSentiment: this.calculateHighestSentiment('facebook', data),
 				twitterSentiment: this.calculateHighestSentiment('twitter', data),
 				redditSentiment: this.calculateHighestSentiment('reddit', data),
@@ -66,15 +63,10 @@ class Insights extends React.Component {
 	}
 
 	calculateHighestSentiment(website, data) {
-		let result = 'neutraal';
-
-		if (data[website].positive >= data[website].neutral) {
-			if (data[website].positive >= data[website].negative) {
-				result = 'positief';
-			} else if (data[website].negative >= data[website].positive) {
-				result = 'negatief';
-			}
-		} else if (data[website].negative >= data[website].neutral) {
+		let result = '';
+		if (data[website].positive >= data[website].negative) {
+			result = 'positief';
+		} else {
 			result = 'negatief';
 		}
 
@@ -106,12 +98,11 @@ class Insights extends React.Component {
 		return {
 			positive: this.calculatePercent(data[website], 'positive'),
 			negative: this.calculatePercent(data[website], 'negative'),
-			neutral: this.calculatePercent(data[website], 'neutral'),
 		}
 	}
 
 	calculatePercent(data, sentiment) {
-		let total = data.positive + data.negative + data.neutral;
+		let total = data.positive + data.negative;
 		let percent = (data[sentiment] / total) * 100;
 		return percent;
 	}

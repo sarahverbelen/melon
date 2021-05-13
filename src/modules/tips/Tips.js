@@ -8,7 +8,7 @@ function Tips() {
 				<div id='line'></div>
 				<div className='timeline-tip'>
 					<div className='tip-number'>1</div>
-					<p className="smallText"><b>Wees je ervan bewust dat niet alles wat op sociale media staat écht is.</b> <br /> Foto's worden bewerkt, verhalen opgeblazen en je ziet enkel wat iemand wil dat je ziet. Wat je van het leven ziet op sociale media kan je onmogelijk vergelijken met het échte leven.</p>
+					<p className="smallText"><b>Niet alles wat op sociale media staat is écht.</b> <br /> Foto's worden bewerkt, verhalen opgeblazen en je ziet enkel wat iemand wil dat je ziet. Wat je van het leven ziet op sociale media kan je onmogelijk vergelijken met het échte leven; wees je hiervan bewust.</p>
 				</div>
 				<div className='timeline-tip'>
 					<div className='tip-number'>2</div>

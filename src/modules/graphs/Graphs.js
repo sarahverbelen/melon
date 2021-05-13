@@ -283,15 +283,13 @@ class Graphs extends Component {
 		const data = {
 			labels: [
 				'Positief',
-				'Neutraal',
 				'Negatief'
 			],
 			datasets: [{
 				label: 'sentiment',
-				data: [sentimentData.positiveCount, sentimentData.neutralCount, sentimentData.negativeCount],
+				data: [sentimentData.positiveCount, sentimentData.negativeCount],
 				backgroundColor: [
 					'rgb(89, 161, 96)', // positive
-					'rgb(103, 103, 103)', // neutral
 					'rgb(235, 98, 86)' // negative
 				],
 				hoverOffset: 2,
@@ -322,13 +320,11 @@ class Graphs extends Component {
 		const labels = [];
 		const dataPositive = [];
 		const dataNegative = [];
-		const dataNeutral = [];
 
 		for (const day in perDayCount) {
 			labels.push(day);
 			dataPositive.push(perDayCount[day].positive);
 			dataNegative.push(perDayCount[day].negative);
-			dataNeutral.push(perDayCount[day].neutral);
 		}
 
 		const data = {
@@ -338,14 +334,6 @@ class Graphs extends Component {
 			data: dataPositive,
 			backgroundColor: [
 				'rgb(89, 161, 96)'
-			],
-			borderWidth: 0
-		},
-		{
-			label: 'Neutraal',
-			data: dataNeutral,
-			backgroundColor: [
-				'rgb(103, 103, 103)'
 			],
 			borderWidth: 0
 		},
@@ -396,14 +384,6 @@ class Graphs extends Component {
 			data: [sentimentData.websiteCount[website].positive], 
 			backgroundColor: [
 				'rgb(89, 161, 96)'
-			],
-			borderWidth: 0
-		},
-		{
-			label: 'Neutraal',
-			data: [sentimentData.websiteCount[website].neutral], 
-			backgroundColor: [
-				'rgb(103, 103, 103)'
 			],
 			borderWidth: 0
 		},
