@@ -14,6 +14,9 @@ class Insights extends React.Component {
 			facebookSentiment: '',
 			redditSentiment: '',
 			twitterSentiment: '',
+			mostUsedWord: '',
+			mostNegativeWord: '',
+			mostPositiveWord: ''
 		}
 
 		this.calculateInsights = this.calculateInsights.bind(this);
@@ -33,6 +36,9 @@ class Insights extends React.Component {
 					<li>De meeste berichten op Facebook zijn <span className={this.state.facebookSentiment}>{this.state.facebookSentiment}</span></li>
 					<li>De meeste berichten op Reddit zijn <span className={this.state.redditSentiment}>{this.state.redditSentiment}</span></li>
 					<li>De meeste berichten op Twitter zijn <span className={this.state.twitterSentiment}>{this.state.twitterSentiment}</span></li>
+					<li>Het meest voorkomende sleutelwoord is "{this.state.mostUsedWord}"</li>
+					<li>Het meest <span className='negatief'>negatieve</span> sleutelwoord is "{this.state.mostNegativeWord}"</li>
+					<li>Het meest <span className='positief'>positieve</span> sleutelwoord is "{this.state.mostPositiveWord}"</li>
 				</ul>
 			</section>
 		);
@@ -48,6 +54,39 @@ class Insights extends React.Component {
 			console.log(response.data);
 			let data = response.data.websiteCount;
 
+			let keywordData = response.data.keywordCount;
+			let keywordArray = [];
+
+			for (let word in keywordData) {
+				if (word !== '') {
+					let object = {
+						...keywordData[word],
+						'word': word
+					}
+					keywordArray.push(object);
+				}
+			}
+
+			let mostUsed = keywordArray.reduce(function(prev, current) {
+				return (prev.count > current.count) ? prev : current
+			});
+
+			let mostNegativeWord = keywordArray.reduce(function(prev, current) {
+				if (current.count > 1) {
+					return ((prev.negativeCount / prev.count) > (current.negativeCount / current.count)) ? prev : current
+				} else {
+					return prev;
+				}
+			});
+
+			let mostPositiveWord = keywordArray.reduce(function(prev, current) {
+				if (current.count > 1) {
+					return ((prev.positiveCount / prev.count) > (current.positiveCount / current.count)) ? prev : current
+				} else {
+					return prev;
+				}
+			});
+
 			// set the state
 			this.setState({
 				mostNegative: this.calculateHighestWebsite('negative', data),
@@ -55,6 +94,9 @@ class Insights extends React.Component {
 				facebookSentiment: this.calculateHighestSentiment('facebook', data),
 				twitterSentiment: this.calculateHighestSentiment('twitter', data),
 				redditSentiment: this.calculateHighestSentiment('reddit', data),
+				mostUsedWord: mostUsed.word,
+				mostNegativeWord: mostNegativeWord.word,
+				mostPositiveWord: mostPositiveWord.word
 			})
 		}.bind(this))
 		.catch(function(response) {
