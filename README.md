@@ -27,3 +27,4 @@ The project is made up of a few different parts: this repository is for the Reac
 * [Sitepoint](https://www.sitepoint.com/)
 * [Privacyverklaring generator](https://veiliginternetten.nl/privacyverklaring-generator/start/)
 * [Chromium docs](https://www.chromium.org/developers/design-documents/create-amazing-password-forms)
+* [React Hook Form](https://react-hook-form.com/)

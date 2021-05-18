@@ -58,7 +58,7 @@ class Header extends React.Component {
 			return (
 				<header className='Header' data-testid='header'>
 					<Link to='/'><img src={logo} className="Header-logo" alt="logo" data-testid='logo' /></Link>
-					{this.state.loginLink} {/* TODO: dynamically change to dashboard when logged in */}
+					{this.state.loginLink}
 					<Button label='Installeer de plugin' url='https://google.com' position='right'  newTab={true}></Button>
 				</header>
 			)
