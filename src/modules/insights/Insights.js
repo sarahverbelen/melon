@@ -1,6 +1,7 @@
 import React from 'react';
 import axios from 'axios';
 import { read_cookie } from 'sfcookies';
+import environment from '../../environments.json';
 
 import './Insights.css';
 
@@ -47,7 +48,7 @@ class Insights extends React.Component {
 	calculateInsights() {
 		axios({
 			method: 'get',
-			url: 'http://127.0.0.1:5000/record/?time=alltime',
+			url: environment['api-url'] + '/record/?time=alltime',
 			headers: {'Authorization': read_cookie('auth_token')}
 		})
 		.then(function(response) {

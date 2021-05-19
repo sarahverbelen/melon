@@ -15,7 +15,7 @@ class Header extends React.Component {
 		super(props);
 		this.state = {
 			settingsVisible: false,
-			loginLink: <Link to='/login' className='dashboardLink' data-testid='dashboardLink'>Inloggen of registreren</Link>
+			loginLink: <Link to='/login' className='dashboardLink' data-testid='dashboardLink'>Inloggen</Link>
 		}
 		this.settings = '';
 		this.toggleSettings = this.toggleSettings.bind(this);

@@ -3,6 +3,7 @@ import axios from 'axios';
 import { delete_cookie, read_cookie } from 'sfcookies';
 
 import './Settings.css';
+import environment from '../../environments.json';
 
 import Toggle from '../toggle/Toggle';
 import React, { useState, useEffect } from 'react';
@@ -20,7 +21,7 @@ function Settings () {
 	useEffect(() => {
 		axios({
 			method: 'get',
-			url: 'http://127.0.0.1:5000/me',
+			url: environment['api-url'] + '/me',
 			headers: {'Authorization': read_cookie('auth_token')},
 		})
 		.then(function(response) {
@@ -45,7 +46,7 @@ function Settings () {
 
 		axios({
 			method: 'post',
-			url: 'http://127.0.0.1:5000/settings',
+			url: environment['api-url'] + '/settings',
 			headers: {'Authorization': read_cookie('auth_token')},
 			data: formData
 		})
@@ -66,7 +67,7 @@ function Settings () {
 		<div id='settings'>
 			<h2 id='greeting'>Welkom, Jane Doe!</h2>
 			<h2>Instellingen</h2>
-			<form  onSubmit={handleSubmit(onSubmit)}>
+			<form  onSubmit={handleSubmit(onSubmit)} className='settingsForm'>
 				{/* <Toggle name='colorblind' checked={false} register={register}/>
 				<p className='label'>Kleurenblindmodus</p> <br /> */}
 				<p id='websiteSettingsTitle'>Websites waarop de plugin geactiveerd is:</p> <br />
@@ -102,7 +103,7 @@ function handleDelete(e) {
 	if(window.confirm("Weet je zeker dat je je account en data wil verwijderen? Dit kan niet ongedaan gemaakt worden.")) {
 		axios({
 			method: 'get',
-			url: 'http://127.0.0.1:5000/me/delete',
+			url: environment['api-url'] + '/me/delete',
 			headers: {'Authorization': read_cookie('auth_token')},
 		})
 		.then(function(response) {

@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import axios from 'axios';
 import { bake_cookie } from 'sfcookies';
 
+import environment from '../../environments.json';
 import Button from '../button/Button';
 
 class Register extends React.Component {
@@ -57,7 +58,7 @@ class Register extends React.Component {
 	
 				axios({
 					method: 'post',
-					url: 'http://localhost:5000/register',
+					url: environment['api-url'] + '/register',
 					data: formData,
 					headers: { "Content-Type": "multipart/form-data" },
 				}).then(function (res) {

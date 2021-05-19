@@ -9,6 +9,8 @@
 	display: flex;
 	width: 100%;
 	box-sizing: border-box;
+	position: absolute;
+	z-index: -1;
 }
 
 #login, #register {

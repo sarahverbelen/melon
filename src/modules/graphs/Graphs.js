@@ -2,6 +2,7 @@ import Chart from 'chart.js/auto';
 import React, { Component } from 'react';
 import axios from 'axios';
 import { read_cookie } from 'sfcookies';
+import environment from '../../environments.json';
 
 import './Graphs.css'
 
@@ -84,7 +85,7 @@ class Graphs extends Component {
 
 		axios({
 			method: 'get',
-			url: 'http://127.0.0.1:5000/record/?' + queryString,
+			url: environment['api-url'] + '/record/?' + queryString,
 			headers: {'Authorization': read_cookie('auth_token')}
 		})
 		.then(function(response) {
@@ -103,7 +104,7 @@ class Graphs extends Component {
 
 		axios({
 			method: 'get',
-			url: `http://127.0.0.1:5000/record/?time=week&pastweek=${this.state.weekStepsBack}`,
+			url: environment['api-url'] + `/record/?time=week&pastweek=${this.state.weekStepsBack}`,
 			headers: {'Authorization': read_cookie('auth_token')}
 		})
 		.then(function(response) {
@@ -378,19 +379,12 @@ class Graphs extends Component {
 	// HORIZONTAL BAR CHARTS (EMOTIONELE VERDELING PER WEBSITE)
 	createWebsiteChart(sentimentData, myChartRef, website) {
 		const data = {
-		labels: [''],
+		labels: ['Positief', 'Negatief'],
 		datasets: [{
-			label: 'Positief',
-			data: [sentimentData.websiteCount[website].positive], 
+			label: '',
+			data: [sentimentData.websiteCount[website].positive, sentimentData.websiteCount[website].negative], 
 			backgroundColor: [
-				'rgb(89, 161, 96)'
-			],
-			borderWidth: 0
-		},
-		{
-			label: 'Negatief',
-			data: [sentimentData.websiteCount[website].negative], 
-			backgroundColor: [
+				'rgb(89, 161, 96)',
 				'rgb(235, 98, 86)'
 			],
 			borderWidth: 0
@@ -401,20 +395,32 @@ class Graphs extends Component {
 			type: 'bar',
 			data: data,
 			options: {
-			indexAxis: 'y',
-			scales: {
-				y: {
-				beginAtZero: true,
-				grid: {
-					display: false
-				}
-				},
-				x: {
+				plugins: {
+					legend: {
+					  display: false
+					},
+					tooltips: {
+						callbacks: {
+							label: function() {
+								return "test123";
+							}
+						}
+					},
+				  },
+				indexAxis: 'y',
+				scales: {
+					y: {
+					beginAtZero: true,
 					grid: {
 						display: false
 					}
+					},
+					x: {
+						grid: {
+							display: false
+						}
+					}
 				}
-			}
 			},
 		};
 
