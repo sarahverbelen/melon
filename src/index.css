@@ -52,3 +52,36 @@ input {
   margin-bottom: 20px;
   margin-left: 50px;
 }
+
+/* tooltip based on  https://www.w3schools.com/css/css_tooltip.asp */
+.tooltip {
+  position: relative;
+  display: inline-block;
+  font-weight: 700;
+  font-size: 25px;
+  color: #676767;
+  cursor: help;
+
+  display: inline-block;
+	margin-left: 20px;
+}
+
+.tooltip .tooltiptext {
+  visibility: hidden;
+  font-size: 18px;
+  font-weight: 500;
+  width: 350px;
+  background-color: rgba(0,0,0,0.6);
+  color: #fff;
+  text-align: center;
+  padding: 5px 0;
+  border-radius: 6px;
+ 
+  position: absolute;
+  z-index: 1;
+  margin-left: 5px;
+}
+
+.tooltip:hover .tooltiptext {
+  visibility: visible;
+}

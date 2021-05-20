@@ -235,7 +235,9 @@ class Graphs extends Component {
 		return(
 		<section id='graphs'>
 			<div id='graphTop'>
-				<h2>Grafieken</h2>
+				<h2 className='graphTitle'>Grafieken</h2>
+				<div className='tooltip' id='insightsHelp'>?
+				<span className="tooltiptext">Een overzicht van de berichten die je gezien hebt. Rechts van deze titel kan je een tijdspanne selecteren om te bekijken. De negativiteit of positiviteit alsook de kernwoorden van de berichten is gebaseerd op de analyse van onze Artificiële Intelligentie.</span></div>
 				<div id='filter'>
 					<img src={arrowLeftRed} alt='terug' className='timeArrow' onClick={() => {this.mainSkip(-1)}}/>
 					<select name="filter" id='filterSelect' onChange={this.handleFilter} value={this.state.filter}>
@@ -248,7 +250,9 @@ class Graphs extends Component {
 			</div>
 			<div id='graphArea'>
 				<div id='perWebsite'>
-					<h3>Emotionele verdeling / website</h3>
+					<h3 className='graphTitle'>Emotionele verdeling / website</h3>
+					<div className='tooltip' id='insightsHelp'>?
+				<span className="tooltiptext">Een overzicht van de positieve en negatieve berichten, opgedeeld per website waar de berichten vandaan komen. Bovenaan de grafiek vind je steeds de kernwoorden; de groene zijn de meest voorkomende binnen positieve berichten, de rode binnen negatieve berichten.</span></div>
 					<div id='websites'>
 						<div id='websiteFacebook'>
 							<img src={facebook} alt='facebook'/>
@@ -268,13 +272,17 @@ class Graphs extends Component {
 					</div>
 				</div>
 				<div id='perDay'>
-					<h3>Aantal berichten / dag</h3>
+					<h3 className='graphTitle'>Aantal berichten / dag</h3>
+					<div className='tooltip' id='insightsHelp'>?
+				<span className="tooltiptext">Een weekoverzicht van de berichten die je gezien hebt, opgedeeld per dag. Met de pijlen onder de grafiek kan je vorige weken bekijken.</span></div>
 					<canvas id='barChart' ref={this.barChartRef}></canvas>
 					<img src={arrowLeftRed} alt='terug' className='timeArrow' onClick={() => {this.weekSkip(-1)}}/>
 					<img src={this.state.arrowWeekRight} alt='verder' className='timeArrow' onClick={this.continueWeekFunction}/>
 				</div>
 				<div id='total'>
-					<h3>Algemene verdeling</h3>
+					<h3 className='graphTitle'>Algemene verdeling</h3>
+					<div className='tooltip' id='insightsHelp'>?
+				<span className="tooltiptext">Een overzicht van de totale positieve en negatieve berichten die je gezien hebt binnen de geselecteerde tijdspanne.</span></div>
 					<canvas id='dougnutChart' ref={this.doughnutChartRef}></canvas>
 				</div>
 			</div>

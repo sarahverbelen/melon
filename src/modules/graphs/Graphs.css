@@ -53,6 +53,10 @@
 	padding: 50px;
 }
 
+.graphTitle {
+	display: inline-block;
+}
+
 #perDay h3, #total h3 {
 	margin-left: -50px;
 }

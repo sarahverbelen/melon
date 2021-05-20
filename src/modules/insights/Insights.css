@@ -14,3 +14,7 @@
 .positief {
 	color: #59A160;
 }
+
+#insights h2 {
+	display: inline-block;
+}

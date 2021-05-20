@@ -31,6 +31,8 @@ class Insights extends React.Component {
 		return (
 			<section id='insights'>
 				<h2>Inzichten</h2>
+				<div className='tooltip' id='insightsHelp'>?
+				<span className="tooltiptext">Gepersonaliseerde inzichten op basis van de analyse van de berichten die jij op sociale media gezien hebt.</span></div>
 				<ul className='melonList'>
 					<li>De meeste <span className='negatief'>negatieve</span> berichten komen van {this.state.mostNegative}</li>
 					<li>De meeste <span className='positief'>positieve</span> berichten komen van {this.state.mostPositive}</li>
