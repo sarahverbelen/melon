@@ -52,7 +52,7 @@ class Insights extends React.Component {
 			headers: {'Authorization': read_cookie('auth_token')}
 		})
 		.then(function(response) {
-			console.log(response.data);
+			// console.log(response.data);
 			let data = response.data.websiteCount;
 
 			let keywordData = response.data.keywordCount;

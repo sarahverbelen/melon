@@ -26,7 +26,13 @@ class Graphs extends Component {
 			stepsBack: '0',
 			weekStepsBack: 0,
 			arrowRight: arrowRightGrey,
-			arrowWeekRight: arrowRightGrey
+			arrowWeekRight: arrowRightGrey,
+			facebookNegativeKeywords: '',
+			facebookPositiveKeywords: '',
+			twitterNegativeKeywords: '',
+			twitterPositiveKeywords: '',
+			redditNegativeKeywords: '',
+			redditPositiveKeywords: ''
 		}
 
 		this.handleFilter = this.handleFilter.bind(this);
@@ -36,6 +42,7 @@ class Graphs extends Component {
 		this.weekSkip = this.weekSkip.bind(this);
 		this.continueFunction = this.continueFunction.bind(this);
 		this.continueWeekFunction = this.continueWeekFunction.bind(this);
+		this.getwebsiteKeywords = this.getwebsiteKeywords.bind(this);
 
 		this.createDoughnutChart = this.createDoughnutChart.bind(this);
 		this.createBartChart = this.createBarChart.bind(this);
@@ -93,10 +100,90 @@ class Graphs extends Component {
 			this.createWebsiteChart(response.data, myFacebookChartRef, 'facebook', this.facebookChart);
 			this.createWebsiteChart(response.data, myRedditChartRef, 'reddit', this.redditChart);
 			this.createWebsiteChart(response.data, myTwitterChartRef, 'twitter', this.twitterChart);
+			this.getwebsiteKeywords(response.data.websiteCount.facebook, 'facebook');
+			this.getwebsiteKeywords(response.data.websiteCount.reddit, 'reddit');
+			this.getwebsiteKeywords(response.data.websiteCount.twitter, 'twitter');
 		}.bind(this))
 		.catch(function(response) {
 			console.log(response);
 		});
+	}
+
+	getwebsiteKeywords(data, website) {
+		console.log(data);
+
+		let positive, negative;
+
+		let positiveSentence, negativeSentence = ''
+
+		if(data.positive !== 0) {
+			positive = this.sortKeywordArray(data.positiveKeywords);
+			if (positive.length >= 3) {
+				positiveSentence = `${positive[0].word}, ${positive[1].word}, ${positive[2].word}`;
+			} else {
+				if (positive.length === 2) {
+					positiveSentence = `${positive[0].word}, ${positive[1].word}`;
+				} else {
+					positiveSentence = `${positive[0].word}`;
+				}
+			}
+		}
+
+		if(data.negative !== 0) {
+			negative = this.sortKeywordArray(data.negativeKeywords);
+			if (negative.length >= 3) {
+				negativeSentence = `${negative[0].word}, ${negative[1].word}, ${negative[2].word}`;
+			} else {
+				if (negative.length === 2) {
+					negativeSentence = `${negative[0].word}, ${negative[1].word}`;
+				} else {
+					negativeSentence = `${negative[0].word}`;
+				}
+			}
+		}
+
+		switch(website){
+			case 'facebook': 
+				this.setState({
+					facebookNegativeKeywords: negativeSentence,
+					facebookPositiveKeywords: positiveSentence,
+				});
+				break;
+			case 'twitter': 
+				this.setState({
+					twitterNegativeKeywords: negativeSentence,
+					twitterPositiveKeywords: positiveSentence,
+				});
+				break;
+			case 'reddit': 
+				this.setState({
+					redditNegativeKeywords: negativeSentence,
+					redditPositiveKeywords: positiveSentence,
+				});
+				break;
+			default: break;
+		}
+
+		// console.log(positive);
+	}
+
+	sortKeywordArray(keywords) {
+		let result = [];
+		for (let word in keywords) {
+			if (word !== '') {
+				let object = {
+					...keywords[word],
+					'word': word
+				}
+				result.push(object);
+			}
+		}
+
+		result.sort(function(a, b) {
+			return b.count - a.count
+		});
+
+		return result;
 	}
 
 	getWeekResults() {
@@ -108,7 +195,7 @@ class Graphs extends Component {
 			headers: {'Authorization': read_cookie('auth_token')}
 		})
 		.then(function(response) {
-			console.log(response.data)
+			// console.log(response.data)
 			this.createBarChart(response.data, myBarChartRef);
 		}.bind(this))
 		.catch(function(response) {
@@ -166,14 +253,17 @@ class Graphs extends Component {
 						<div id='websiteFacebook'>
 							<img src={facebook} alt='facebook'/>
 							<canvas id='facebookChart' ref={this.facebookChartRef}></canvas>
+							<div className='keywords'><span className='positief'>{this.state.facebookPositiveKeywords}</span> <span className='negatief'>{this.state.facebookNegativeKeywords}</span></div>	
 						</div>
 						<div id='websiteReddit'>
 							<img src={reddit} alt='reddit'/>
 							<canvas id='redditChart' ref={this.redditChartRef}></canvas>
+							<div className='keywords'><span className='positief'>{this.state.redditPositiveKeywords}</span> <span className='negatief'>{this.state.redditNegativeKeywords}</span></div>	
 						</div>
 						<div id='websiteTwitter'>
 							<img src={twitter} alt='twitter'/>
 							<canvas id='twitterChart' ref={this.twitterChartRef}></canvas>
+							<div className='keywords'><span className='positief'>{this.state.twitterPositiveKeywords}</span> <span className='negatief'>{this.state.twitterNegativeKeywords}</span></div>	
 						</div>
 					</div>
 				</div>
@@ -379,12 +469,19 @@ class Graphs extends Component {
 	// HORIZONTAL BAR CHARTS (EMOTIONELE VERDELING PER WEBSITE)
 	createWebsiteChart(sentimentData, myChartRef, website) {
 		const data = {
-		labels: ['Positief', 'Negatief'],
+		labels: [''],
 		datasets: [{
-			label: '',
-			data: [sentimentData.websiteCount[website].positive, sentimentData.websiteCount[website].negative], 
+			label: 'Positief',
+			data: [sentimentData.websiteCount[website].positive], 
 			backgroundColor: [
-				'rgb(89, 161, 96)',
+				'rgb(89, 161, 96)'
+			],
+			borderWidth: 0
+		},
+		{
+			label: 'Negatief',
+			data: [sentimentData.websiteCount[website].negative], 
+			backgroundColor: [
 				'rgb(235, 98, 86)'
 			],
 			borderWidth: 0
@@ -399,14 +496,7 @@ class Graphs extends Component {
 					legend: {
 					  display: false
 					},
-					tooltips: {
-						callbacks: {
-							label: function() {
-								return "test123";
-							}
-						}
-					},
-				  },
+				},
 				indexAxis: 'y',
 				scales: {
 					y: {

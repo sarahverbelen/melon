@@ -34,6 +34,15 @@
 	margin-right: 4vw;
 }
 
+.keywords {
+	position: absolute;
+	margin-top: -80px;
+}
+
+.keywords span {
+	margin-left: 1.8vw;
+}
+
 #perDay {
 	width: 40vw;
 	padding: 50px;

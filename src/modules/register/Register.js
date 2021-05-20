@@ -47,6 +47,7 @@ class Register extends React.Component {
 	}
 
 	handleRegister(e) {
+		console.log('register');
 		e.preventDefault();
 		console.log(this.state.email, this.state.password);
 

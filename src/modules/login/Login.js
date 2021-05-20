@@ -51,6 +51,7 @@ class Login extends React.Component {
 	  }
 
 	handleLogin(e) {
+		console.log("login")
 		e.preventDefault();
 		let formData = new FormData();
 		formData.append('email', this.state.email)
@@ -70,7 +71,7 @@ class Login extends React.Component {
 			// TODO: error handling, showing the user what's wrong
 			console.log(err)
 			this.setState({error: true})
-		});
+		}.bind(this));
 	}
 }
 
