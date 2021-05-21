@@ -19,7 +19,8 @@ class Register extends React.Component {
 			privacyError: false,
 			emailError: false,
 			passwordError: false,
-			error: false
+			error: false,
+			existingError: false,
 		}
 
 		this.handleRegister = this.handleRegister.bind(this);
@@ -40,6 +41,7 @@ class Register extends React.Component {
 				<input type='checkbox' id='registerPrivacy' name='privacy' value={this.state.privacy} onChange={this.handleInputChange}></input> <label htmlFor='registerPrivacy'>Ik bevestig dat ik de <Link to='/privacy'>Privacyverklaring</Link> gelezen heb</label> <br />
 				{ this.state.privacyError ? <span className='error'>Je moet de privacyverklaring accepteren om een account te kunnen maken.</span> : null }
 				{ this.state.error ? <span className='error'>Er is iets misgegaan bij de registratie, probeer alsjeblieft opnieuw.</span> : null }
+				{ this.state.existingError ? <span className='error'>Dit emailadres is al in gebruik.</span> : null }
 				<Button label="Registreer" position="center" newTab={false} onClick={this.handleRegister}/> 
 				</form>
 			</div>
@@ -60,6 +62,7 @@ class Register extends React.Component {
 		console.log('register');
 		e.preventDefault();
 		this.setState({error: false});
+		this.setState({existingError: false});
 
 		if(/^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/.test(this.state.email)){ // check if email is valid
 			this.setState({emailError: false});
@@ -68,7 +71,7 @@ class Register extends React.Component {
 				if(this.state.password === this.state.passwordRepeat) { // check if the same password was entered twice
 					this.setState({repeatPasswordError: false});
 					if(this.state.privacy) { // check if the privacy checkbox is checked
-						this.setState({privacyError: true});
+						this.setState({privacyError: false});
 						let formData = new FormData();
 						formData.append('email', this.state.email)
 						formData.append('password', this.state.password)
@@ -85,8 +88,12 @@ class Register extends React.Component {
 							window.location = '/dashboard'
 						}).catch(function(err) {
 							console.log(err);
-							this.setState({error: true});
-						});
+							if(err.response?.status === 409) {
+								this.setState({existingError: true});
+							} else {
+								this.setState({error: true});
+							}
+						}.bind(this));
 					} else {
 						this.setState({privacyError: true});
 					}
