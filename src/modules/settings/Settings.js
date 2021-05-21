@@ -33,6 +33,7 @@ function Settings () {
 		})
 		.catch(function(response) {
 			console.log(response);
+			
 		});		
 	  }, []);
 

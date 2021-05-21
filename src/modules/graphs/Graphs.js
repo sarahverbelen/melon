@@ -1,7 +1,7 @@
 import Chart from 'chart.js/auto';
 import React, { Component } from 'react';
 import axios from 'axios';
-import { read_cookie } from 'sfcookies';
+import { read_cookie, delete_cookie } from 'sfcookies';
 import environment from '../../environments.json';
 
 import './Graphs.css'
@@ -32,7 +32,12 @@ class Graphs extends Component {
 			twitterNegativeKeywords: '',
 			twitterPositiveKeywords: '',
 			redditNegativeKeywords: '',
-			redditPositiveKeywords: ''
+			redditPositiveKeywords: '',
+			facebookError: '',
+			twitterError: '',
+			redditError: '',
+			weekError: '',
+			doughnutError: ''
 		}
 
 		this.handleFilter = this.handleFilter.bind(this);
@@ -105,12 +110,62 @@ class Graphs extends Component {
 			this.getwebsiteKeywords(response.data.websiteCount.twitter, 'twitter');
 		}.bind(this))
 		.catch(function(response) {
+			if(response?.response?.status === 401) { // if the request is unauthorized, this is probably because the credentials have expired
+				// so we will log the user out so he can log in again and get valid credentials
+				delete_cookie('loggedIn');
+				delete_cookie('auth_token');
+				window.location = '/'
+			}
 			console.log(response);
-		});
+			this.setState({
+				facebookError: <div className='graphError' id='facebookError'>Er is iets misgegaan bij het ophalen van de data.</div>,
+				twitterError: <div className='graphError' id='twitterError'>Er is iets misgegaan bij het ophalen van de data.</div>,
+				redditError: <div className='graphError' id='redditError'>Er is iets misgegaan bij het ophalen van de data.</div>,
+				doughnutError: <div className='graphError' id='doughnutError'>Er is iets misgegaan bij het ophalen van de data.</div>
+			});
+		}.bind(this));
 	}
 
 	getwebsiteKeywords(data, website) {
-		console.log(data);
+			switch(website){
+				case 'facebook': 
+					if(data.positive === 0 && data.negative === 0) {
+						this.setState({
+							facebookError: <div className='graphError' id='facebookError'>Er geen data gevonden voor Facebook in deze tijdspanne.</div>,
+						});
+						break;
+					} else {
+						this.setState({
+							facebookError: '',
+						});
+						break;
+					}
+				case 'twitter': 
+					if(data.positive === 0 && data.negative === 0) {
+						this.setState({
+							twitterError: <div className='graphError' id='twitterError'>Er geen data gevonden voor Twitter in deze tijdspanne.</div>,
+						});
+						break;
+					} else {
+						this.setState({
+							twitterError: '',
+						});
+						break;
+					}
+				case 'reddit': 
+					if(data.positive === 0 && data.negative === 0) {
+						this.setState({
+							redditError: <div className='graphError' id='redditkError'>Er geen data gevonden voor Reddit in deze tijdspanne.</div>,
+						});
+						break;
+					} else {
+						this.setState({
+							redditError: '',
+						});
+						break;
+					}
+				default: break;
+			}
 
 		let positive, negative;
 
@@ -200,7 +255,10 @@ class Graphs extends Component {
 		}.bind(this))
 		.catch(function(response) {
 			console.log(response);
-		});
+			this.setState({
+				weekError: <div className='graphError' id='weekError'>Er is iets misgegaan bij het ophalen van de data.</div>,
+			});
+		}.bind(this));
 	}
 
 	handleFilter() {
@@ -220,14 +278,14 @@ class Graphs extends Component {
 	}
 
 	clearCharts() {
-		this.doughnutChart.destroy();
-		this.facebookChart.destroy();
-		this.redditChart.destroy();
-		this.twitterChart.destroy();
+			this.doughnutChart?.destroy();
+			this.facebookChart?.destroy();
+			this.redditChart?.destroy();
+			this.twitterChart?.destroy();
 	}
 
 	clearWeekChart() {
-		this.barChart.destroy();
+			this.barChart?.destroy();
 	}
 
 	// RENDER
@@ -252,20 +310,23 @@ class Graphs extends Component {
 				<div id='perWebsite'>
 					<h3 className='graphTitle'>Emotionele verdeling / website</h3>
 					<div className='tooltip' id='insightsHelp'>?
-				<span className="tooltiptext">Een overzicht van de positieve en negatieve berichten, opgedeeld per website waar de berichten vandaan komen. Bovenaan de grafiek vind je steeds de kernwoorden; de groene zijn de meest voorkomende binnen positieve berichten, de rode binnen negatieve berichten.</span></div>
+					<span className="tooltiptext">Een overzicht van de positieve en negatieve berichten, opgedeeld per website waar de berichten vandaan komen. Bovenaan de grafiek vind je steeds de kernwoorden; de groene zijn de meest voorkomende binnen positieve berichten, de rode binnen negatieve berichten.</span></div>
 					<div id='websites'>
 						<div id='websiteFacebook'>
 							<img src={facebook} alt='facebook'/>
+							{this.state.facebookError}
 							<canvas id='facebookChart' ref={this.facebookChartRef}></canvas>
 							<div className='keywords'><span className='positief'>{this.state.facebookPositiveKeywords}</span> <span className='negatief'>{this.state.facebookNegativeKeywords}</span></div>	
 						</div>
 						<div id='websiteReddit'>
 							<img src={reddit} alt='reddit'/>
+							{this.state.redditError}
 							<canvas id='redditChart' ref={this.redditChartRef}></canvas>
 							<div className='keywords'><span className='positief'>{this.state.redditPositiveKeywords}</span> <span className='negatief'>{this.state.redditNegativeKeywords}</span></div>	
 						</div>
 						<div id='websiteTwitter'>
 							<img src={twitter} alt='twitter'/>
+							{this.state.twitterError}
 							<canvas id='twitterChart' ref={this.twitterChartRef}></canvas>
 							<div className='keywords'><span className='positief'>{this.state.twitterPositiveKeywords}</span> <span className='negatief'>{this.state.twitterNegativeKeywords}</span></div>	
 						</div>
@@ -274,7 +335,8 @@ class Graphs extends Component {
 				<div id='perDay'>
 					<h3 className='graphTitle'>Aantal berichten / dag</h3>
 					<div className='tooltip' id='insightsHelp'>?
-				<span className="tooltiptext">Een weekoverzicht van de berichten die je gezien hebt, opgedeeld per dag. Met de pijlen onder de grafiek kan je vorige weken bekijken.</span></div>
+					<span className="tooltiptext">Een weekoverzicht van de berichten die je gezien hebt, opgedeeld per dag. Met de pijlen onder de grafiek kan je vorige weken bekijken.</span></div>
+					{this.state.weekError}
 					<canvas id='barChart' ref={this.barChartRef}></canvas>
 					<img src={arrowLeftRed} alt='terug' className='timeArrow' onClick={() => {this.weekSkip(-1)}}/>
 					<img src={this.state.arrowWeekRight} alt='verder' className='timeArrow' onClick={this.continueWeekFunction}/>
@@ -282,7 +344,8 @@ class Graphs extends Component {
 				<div id='total'>
 					<h3 className='graphTitle'>Algemene verdeling</h3>
 					<div className='tooltip' id='insightsHelp'>?
-				<span className="tooltiptext">Een overzicht van de totale positieve en negatieve berichten die je gezien hebt binnen de geselecteerde tijdspanne.</span></div>
+					<span className="tooltiptext">Een overzicht van de totale positieve en negatieve berichten die je gezien hebt binnen de geselecteerde tijdspanne.</span></div>
+					{this.state.doughnutError}
 					<canvas id='dougnutChart' ref={this.doughnutChartRef}></canvas>
 				</div>
 			</div>
@@ -379,6 +442,16 @@ class Graphs extends Component {
 
 	// DOUGHNUT CHART (ALGEMENE VERDELING)
 	createDoughnutChart(sentimentData, myDoughnutChartRef) {
+		if(sentimentData.positiveCount === 0 && sentimentData.negativeCount === 0) {
+			this.setState({
+				doughnutError: <div className='graphError' id='doughnutError'>Er geen data gevonden voor deze tijdspanne.</div>,
+			});
+		} else {
+			this.setState({
+				doughnutError: '',
+			});
+		}
+
 		const data = {
 			labels: [
 				'Positief',
@@ -424,6 +497,16 @@ class Graphs extends Component {
 			labels.push(day);
 			dataPositive.push(perDayCount[day].positive);
 			dataNegative.push(perDayCount[day].negative);
+		}
+
+		if(labels.length === 0) {
+			this.setState({
+				weekError: <div className='graphError' id='weekError'>Er is geen data gevonden voor deze week.</div>,
+			});
+		} else {
+			this.setState({
+				weekError: '',
+			});
 		}
 
 		const data = {
