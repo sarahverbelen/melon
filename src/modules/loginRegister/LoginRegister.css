@@ -16,3 +16,9 @@
 #login, #register {
 	width: 45%;
 }
+
+.error {
+	color: #EB6256;
+	margin-left: 50px;
+	display: block;
+}
