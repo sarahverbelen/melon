@@ -179,7 +179,9 @@ class Graphs extends Component {
 				if (positive.length === 2) {
 					positiveSentence = `${positive[0].word}, ${positive[1].word}`;
 				} else {
-					positiveSentence = `${positive[0].word}`;
+					if(positive[0] !== undefined) {
+						positiveSentence = `${positive[0].word}`;
+					}
 				}
 			}
 		}
@@ -192,7 +194,9 @@ class Graphs extends Component {
 				if (negative.length === 2) {
 					negativeSentence = `${negative[0].word}, ${negative[1].word}`;
 				} else {
-					negativeSentence = `${negative[0].word}`;
+					if(negative[0] !== undefined) {
+						negativeSentence = `${negative[0].word}`;
+					}
 				}
 			}
 		}

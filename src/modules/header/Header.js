@@ -59,7 +59,7 @@ class Header extends React.Component {
 				<header className='Header' data-testid='header'>
 					<Link to='/'><img src={logo} className="Header-logo" alt="logo" data-testid='logo' /></Link>
 					{this.state.loginLink}
-					<Button label='Installeer de plugin' url='https://google.com' position='right'  newTab={true}></Button>
+					<Button label='Installeer de plugin' url='/download' position='right'  newTab={false}></Button>
 				</header>
 			)
 		}

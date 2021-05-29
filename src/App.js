@@ -26,6 +26,8 @@ import Privacy from './modules/privacy/Privacy';
 
 import LoginRegister from './modules/loginRegister/LoginRegister';
 
+import Download from './modules/download/Download';
+
 import Test from './modules/test/Test';
 
 function App() {
@@ -48,7 +50,7 @@ function App() {
           <Graphs />
           <Insights />
           <DashboardHelp />
-          <Button label="Installeer de plugin" url="https://google.com" position="center"  newTab={true}/>
+          <Button label="Installeer de plugin" url="/download" position="center"  newTab={false}/>
        </Route>
        <Route path="/login" exact>
         <Header dashboard={false}/>
@@ -57,6 +59,10 @@ function App() {
        <Route path="/privacy" exact>
           <Header dashboard={false}/>
           <Privacy />
+       </Route>
+       <Route path="/download" exact>
+       <Header dashboard={false}/>
+         <Download />
        </Route>
        <Route path="/test" exact>
          <Test />
