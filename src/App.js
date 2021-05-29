@@ -26,6 +26,8 @@ import Privacy from './modules/privacy/Privacy';
 
 import LoginRegister from './modules/loginRegister/LoginRegister';
 
+import Test from './modules/test/Test';
+
 function App() {
   return (
     <Router>
@@ -55,6 +57,9 @@ function App() {
        <Route path="/privacy" exact>
           <Header dashboard={false}/>
           <Privacy />
+       </Route>
+       <Route path="/test" exact>
+         <Test />
        </Route>
       </Switch>
       <Footer />

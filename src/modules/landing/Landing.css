@@ -12,7 +12,6 @@
 	align-items: center;
 	box-shadow: 0px 3px 10px rgba(0,0,0,0.16);
 	position: absolute;
-	z-index: -1;
 }
 
 .innerLanding {
