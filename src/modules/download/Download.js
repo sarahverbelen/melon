@@ -18,6 +18,8 @@ function Download() {
 			<li>4. Activeer de ontwikkelaarmodus rechtsboven</li>
 			<li>5. Klik linksboven op 'uitgepakte extensie laden' en selecteer de 'Melon-plugin-clean' map.</li>
 			<li>6. Nu kan je de extensie in je browser bar zien door rechtsboven op het puzzelstukje te klikken. Eventueel kan je het ook vastpinnen zodat je er makkelijker aan kan.</li>
+			<li>7. Log in op de extensie met het account dat je hier gemaakt hebt. Nog geen account? <a href='/login'>Registreer nu</a>!</li>
+			<li>8. Bekijk je grafieken op je <a href='/dashboard'>dashboard</a>!</li>
 		</ol>
     </section>
     )
