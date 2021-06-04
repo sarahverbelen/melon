@@ -484,9 +484,11 @@ class Graphs extends Component {
 		);
 	}
 
+
+
 	// BAR CHART (AANTAL BERICHTEN PER DAG)
 	createBarChart(sentimentData, myBarChartRef) {
-		const perDayCount = Object.keys(sentimentData.perDayCount).sort().reduce( // https://stackoverflow.com/questions/5467129/sort-javascript-object-by-key
+		const perDayCount = Object.keys(sentimentData.perDayCount).reduce( // based on https://stackoverflow.com/questions/5467129/sort-javascript-object-by-key
 			(obj, key) => { 
 			  obj[key] = sentimentData.perDayCount[key]; 
 			  return obj;
