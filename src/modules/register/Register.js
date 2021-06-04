@@ -85,7 +85,7 @@ class Register extends React.Component {
 							console.log(res);
 							bake_cookie('loggedIn', true);
 							bake_cookie('auth_token', res.data);
-							window.location = '/dashboard'
+							window.location = '/download'
 						}).catch(function(err) {
 							console.log(err);
 							if(err.response?.status === 409) {
