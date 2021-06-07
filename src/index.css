@@ -7,11 +7,14 @@ body {
   font-family: 'Corbel', sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  overflow-x: hidden;
+  min-width: 1300px;
 }
 
 h2 {
   font-weight: 500;
   font-size: 25px;
+  margin-bottom: 30px;
 }
 
 h3 {

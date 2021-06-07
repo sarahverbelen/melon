@@ -66,7 +66,7 @@ function Settings () {
 
 	return (
 		<div id='settings'>
-			<h2 id='greeting'>Welkom, Jane Doe!</h2>
+			<h2 id='greeting'>Welkom!</h2>
 			<h2>Instellingen</h2>
 			<form  onSubmit={handleSubmit(onSubmit)} className='settingsForm'>
 				{/* <Toggle name='colorblind' checked={false} register={register}/>

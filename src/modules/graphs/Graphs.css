@@ -23,11 +23,13 @@
 
 #websites {
 	display: flex;
+	flex-wrap: wrap;
 	align-content: space-between;
 }
 
 #websites div {
 	width: 25%;
+	min-width: 400px;
 	padding: 50px;
 	display: flex;
 	box-sizing: border-box;
@@ -45,11 +47,13 @@
 
 #perDay {
 	width: 40vw;
+	min-width: 500px;
 	padding: 50px;
 }
 
 #total {
 	width: 15vw;
+	min-width: 300px;
 	padding: 50px;
 }
 

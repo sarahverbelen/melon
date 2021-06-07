@@ -46,7 +46,7 @@ class Header extends React.Component {
 		if(this.props.dashboard) { // return the dashboard header
 			return (
 				<header className='Header' data-testid='header'>
-					<Link to='/'><img src={logo} className="Header-logo" alt="logo" data-testid='logo' /></Link>
+					<Link to='/#top'><img src={logo} className="Header-logo" alt="logo" data-testid='logo' /></Link>
 					{this.settings}
 					<img src={profile} alt='profile' id='profile' onClick={this.toggleSettings}/>
 					<a href='#help' className='dashboardLink' data-testid='dashboardLink'>Hulp nodig?</a>
@@ -57,7 +57,7 @@ class Header extends React.Component {
 		} else { // return the homepage header
 			return (
 				<header className='Header' data-testid='header'>
-					<Link to='/'><img src={logo} className="Header-logo" alt="logo" data-testid='logo' /></Link>
+					<Link to='/#top'><img src={logo} className="Header-logo" alt="logo" data-testid='logo' /></Link>
 					{this.state.loginLink}
 					<Button label='Installeer de plugin' url='/download' position='right'  newTab={false}></Button>
 				</header>

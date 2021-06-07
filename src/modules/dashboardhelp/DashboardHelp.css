@@ -11,13 +11,14 @@
 
 #dashboardHelp {
 	margin-top: 50px;
-	height: 50vh;
+	height: 60vh;
 	padding-right: 140px;
 }
 
 #dashboardHelp li {
 	width: 100%;
 	height: 50px;
+	margin-bottom: 20px;
 }
 
 #dashboardHelp li::before {
