@@ -14,6 +14,7 @@ import arrowLeftRed from '../../img/arrow-left-red.png';
 import arrowRightRed from '../../img/arrow-right-red.png';
 import arrowRightGrey from '../../img/arrow-right-grey.png';
 
+import loading from '../../img/loadingicon.gif';
 class Graphs extends Component {
 	constructor(props) {
 		super(props);
@@ -37,7 +38,12 @@ class Graphs extends Component {
 			twitterError: '',
 			redditError: '',
 			weekError: '',
-			doughnutError: ''
+			doughnutError: '',
+			facebookLoading: <img src={loading} alt='loading' id='facebookLoading' class='loading'/>,
+			twitterLoading: <img src={loading} alt='loading' id='twitterLoading' class='loading'/>,
+			redditLoading: <img src={loading} alt='loading' id='redditLoading' class='loading'/>,
+			weekLoading: <img src={loading} alt='loading' id='weekLoading' class='loading'/>,
+			doughnutLoading: <img src={loading} alt='loading' id='doughnutLoading' class='loading'/>,
 		}
 
 		this.handleFilter = this.handleFilter.bind(this);
@@ -83,6 +89,13 @@ class Graphs extends Component {
 		const myRedditChartRef = this.redditChartRef.current.getContext("2d");
 		const myTwitterChartRef = this.twitterChartRef.current.getContext("2d");
 
+		this.setState({
+			facebookLoading: <img src={loading} alt='loading' id='facebookLoading' class='loading'/>,
+			twitterLoading: <img src={loading} alt='loading' id='twitterLoading' class='loading'/>,
+			redditLoading: <img src={loading} alt='loading' id='redditLoading' class='loading'/>,
+			doughnutLoading: <img src={loading} alt='loading' id='doughnutLoading' class='loading'/>
+		});
+
 		// FILTERS
 		let queryString = '';
 
@@ -108,6 +121,13 @@ class Graphs extends Component {
 			this.getwebsiteKeywords(response.data.websiteCount.facebook, 'facebook');
 			this.getwebsiteKeywords(response.data.websiteCount.reddit, 'reddit');
 			this.getwebsiteKeywords(response.data.websiteCount.twitter, 'twitter');
+
+			this.setState({
+				facebookLoading: '',
+				twitterLoading: '',
+				redditLoading: '',
+				doughnutLoading: ''
+			});
 		}.bind(this))
 		.catch(function(response) {
 			if(response?.response?.status === 401) { // if the request is unauthorized, this is probably because the credentials have expired
@@ -121,7 +141,11 @@ class Graphs extends Component {
 				facebookError: <div className='graphError' id='facebookError'>Er is iets misgegaan bij het ophalen van de data.</div>,
 				twitterError: <div className='graphError' id='twitterError'>Er is iets misgegaan bij het ophalen van de data.</div>,
 				redditError: <div className='graphError' id='redditError'>Er is iets misgegaan bij het ophalen van de data.</div>,
-				doughnutError: <div className='graphError' id='doughnutError'>Er is iets misgegaan bij het ophalen van de data.</div>
+				doughnutError: <div className='graphError' id='doughnutError'>Er is iets misgegaan bij het ophalen van de data.</div>,
+				facebookLoading: '',
+				twitterLoading: '',
+				redditLoading: '',
+				doughnutLoading: ''
 			});
 		}.bind(this));
 	}
@@ -248,6 +272,10 @@ class Graphs extends Component {
 	getWeekResults() {
 		const myBarChartRef = this.barChartRef.current.getContext("2d");
 
+		this.setState({
+			weekLoading: <img src={loading} alt='loading' id='facebookLoading' class='loading'/>
+		});
+
 		axios({
 			method: 'get',
 			url: environment['api-url'] + `/record/?time=week&pastweek=${this.state.weekStepsBack}`,
@@ -256,11 +284,15 @@ class Graphs extends Component {
 		.then(function(response) {
 			// console.log(response.data)
 			this.createBarChart(response.data, myBarChartRef);
+			this.setState({
+				weekLoading: ''
+			});
 		}.bind(this))
 		.catch(function(response) {
 			console.log(response);
 			this.setState({
 				weekError: <div className='graphError' id='weekError'>Er is iets misgegaan bij het ophalen van de data.</div>,
+				weekLoading: ''
 			});
 		}.bind(this));
 	}
@@ -319,18 +351,21 @@ class Graphs extends Component {
 						<div id='websiteFacebook'>
 							<img src={facebook} alt='facebook'/>
 							{this.state.facebookError}
+							{this.state.facebookLoading}
 							<canvas id='facebookChart' ref={this.facebookChartRef}></canvas>
 							<div className='keywords'><span className='positief'>{this.state.facebookPositiveKeywords}</span> <span className='negatief'>{this.state.facebookNegativeKeywords}</span></div>	
 						</div>
 						<div id='websiteReddit'>
 							<img src={reddit} alt='reddit'/>
 							{this.state.redditError}
+							{this.state.redditLoading}
 							<canvas id='redditChart' ref={this.redditChartRef}></canvas>
 							<div className='keywords'><span className='positief'>{this.state.redditPositiveKeywords}</span> <span className='negatief'>{this.state.redditNegativeKeywords}</span></div>	
 						</div>
 						<div id='websiteTwitter'>
 							<img src={twitter} alt='twitter'/>
 							{this.state.twitterError}
+							{this.state.twitterLoading}
 							<canvas id='twitterChart' ref={this.twitterChartRef}></canvas>
 							<div className='keywords'><span className='positief'>{this.state.twitterPositiveKeywords}</span> <span className='negatief'>{this.state.twitterNegativeKeywords}</span></div>	
 						</div>
@@ -341,6 +376,7 @@ class Graphs extends Component {
 					<div className='tooltip' id='insightsHelp'>?
 					<span className="tooltiptext">Een weekoverzicht van de berichten die je gezien hebt, opgedeeld per dag. Met de pijlen onder de grafiek kan je vorige weken bekijken.</span></div>
 					{this.state.weekError}
+					{this.state.weekLoading}
 					<canvas id='barChart' ref={this.barChartRef}></canvas>
 					<img src={arrowLeftRed} alt='terug' className='timeArrow' onClick={() => {this.weekSkip(-1)}}/>
 					<img src={this.state.arrowWeekRight} alt='verder' className='timeArrow' onClick={this.continueWeekFunction}/>
@@ -350,6 +386,7 @@ class Graphs extends Component {
 					<div className='tooltip' id='insightsHelp'>?
 					<span className="tooltiptext">Een overzicht van de totale positieve en negatieve berichten die je gezien hebt binnen de geselecteerde tijdspanne.</span></div>
 					{this.state.doughnutError}
+					{this.state.doughnutLoading}
 					<canvas id='dougnutChart' ref={this.doughnutChartRef}></canvas>
 				</div>
 			</div>
