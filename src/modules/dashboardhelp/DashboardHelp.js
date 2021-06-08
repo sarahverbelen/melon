@@ -23,6 +23,7 @@ function DashboardHelp() {
 						<li><a href='https://jongerenhulponline.nl/' target='_blank' rel="noreferrer"><span><u>Jongerenhulponline.nl</u>: vind direct anoniem hulp</span> <img src={jongerenhulponline} alt='jongerenhulponline'/></a></li>
 						<li><a href='https://www.tele-onthaal.be/' target='_blank' rel="noreferrer"><span><u>Tele-onthaal.be</u>: praat over wat jou bezighoudt</span> <img src={teleonthaal} alt='teleonthaal'/></a></li>
 					</ul>
+					<br/>
 		</section>
 	)
 }

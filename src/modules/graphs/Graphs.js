@@ -134,7 +134,7 @@ class Graphs extends Component {
 				// so we will log the user out so he can log in again and get valid credentials
 				delete_cookie('loggedIn');
 				delete_cookie('auth_token');
-				window.location = '/'
+				window.location = '/login'
 			}
 			console.log(response);
 			this.setState({
