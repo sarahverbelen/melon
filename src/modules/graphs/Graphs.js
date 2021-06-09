@@ -155,7 +155,7 @@ class Graphs extends Component {
 				case 'facebook': 
 					if(data.positive === 0 && data.negative === 0) {
 						this.setState({
-							facebookError: <div className='graphError' id='facebookError'>Er geen data gevonden voor Facebook in deze tijdspanne.</div>,
+							facebookError: <div className='graphError' id='facebookError'>Er is geen data gevonden voor Facebook in deze tijdspanne.</div>,
 						});
 						break;
 					} else {
@@ -167,7 +167,7 @@ class Graphs extends Component {
 				case 'twitter': 
 					if(data.positive === 0 && data.negative === 0) {
 						this.setState({
-							twitterError: <div className='graphError' id='twitterError'>Er geen data gevonden voor Twitter in deze tijdspanne.</div>,
+							twitterError: <div className='graphError' id='twitterError'>Er is geen data gevonden voor Twitter in deze tijdspanne.</div>,
 						});
 						break;
 					} else {
@@ -179,7 +179,7 @@ class Graphs extends Component {
 				case 'reddit': 
 					if(data.positive === 0 && data.negative === 0) {
 						this.setState({
-							redditError: <div className='graphError' id='redditkError'>Er geen data gevonden voor Reddit in deze tijdspanne.</div>,
+							redditError: <div className='graphError' id='redditkError'>Er is geen data gevonden voor Reddit in deze tijdspanne.</div>,
 						});
 						break;
 					} else {
@@ -487,7 +487,7 @@ class Graphs extends Component {
 	createDoughnutChart(sentimentData, myDoughnutChartRef) {
 		if(sentimentData.positiveCount === 0 && sentimentData.negativeCount === 0) {
 			this.setState({
-				doughnutError: <div className='graphError' id='doughnutError'>Er geen data gevonden voor deze tijdspanne.</div>,
+				doughnutError: <div className='graphError' id='doughnutError'>Er is geen data gevonden voor deze tijdspanne.</div>,
 			});
 		} else {
 			this.setState({
