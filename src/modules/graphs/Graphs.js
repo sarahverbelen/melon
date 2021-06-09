@@ -493,34 +493,34 @@ class Graphs extends Component {
 			this.setState({
 				doughnutError: '',
 			});
-		}
 
-		const data = {
-			labels: [
-				'Positief',
-				'Negatief'
-			],
-			datasets: [{
-				label: 'sentiment',
-				data: [sentimentData.positiveCount, sentimentData.negativeCount],
-				backgroundColor: [
-					'rgb(89, 161, 96)', // positive
-					'rgb(235, 98, 86)' // negative
+			const data = {
+				labels: [
+					'Positief',
+					'Negatief'
 				],
-				hoverOffset: 2,
-				borderWidth: 0
-			}]
-		};
+				datasets: [{
+					label: 'sentiment',
+					data: [sentimentData.positiveCount, sentimentData.negativeCount],
+					backgroundColor: [
+						'rgb(89, 161, 96)', // positive
+						'rgb(235, 98, 86)' // negative
+					],
+					hoverOffset: 2,
+					borderWidth: 0
+				}]
+			};
 
-		const config = {
-			type: 'doughnut',
-			data: data,
+			const config = {
+				type: 'doughnut',
+				data: data,
+			}
+
+			this.doughnutChart = new Chart(
+				myDoughnutChartRef,
+				config
+			);
 		}
-
-		this.doughnutChart = new Chart(
-			myDoughnutChartRef,
-			config
-		);
 	}
 
 
@@ -553,53 +553,53 @@ class Graphs extends Component {
 				weekError: '',
 			});
 		}
+		
+			const data = {
+			labels: labels,
+			datasets: [{
+				label: 'Positief',
+				data: dataPositive,
+				backgroundColor: [
+					'rgb(89, 161, 96)'
+				],
+				borderWidth: 0
+			},
+			{
+				label: 'Negatief',
+				data: dataNegative,
+				backgroundColor: [
+					'rgb(235, 98, 86)'
+				],
+				borderWidth: 0
+			}]
+			};
 
-		const data = {
-		labels: labels,
-		datasets: [{
-			label: 'Positief',
-			data: dataPositive,
-			backgroundColor: [
-				'rgb(89, 161, 96)'
-			],
-			borderWidth: 0
-		},
-		{
-			label: 'Negatief',
-			data: dataNegative,
-			backgroundColor: [
-				'rgb(235, 98, 86)'
-			],
-			borderWidth: 0
-		}]
-		};
-
-		const config = {
-			type: 'bar',
-			data: data,
-			options: {
-			scales: {
-				y: {
-				beginAtZero: true,
-				stacked: true,
-				grid: {
-					display: false
-				}
-				},
-				x: {
+			const config = {
+				type: 'bar',
+				data: data,
+				options: {
+				scales: {
+					y: {
+					beginAtZero: true,
 					stacked: true,
 					grid: {
 						display: false
 					}
+					},
+					x: {
+						stacked: true,
+						grid: {
+							display: false
+						}
+					}
 				}
-			}
-			},
-		};
+				},
+			};
 
-		this.barChart = new Chart(
-			myBarChartRef,
-			config
-		);
+			this.barChart = new Chart(
+				myBarChartRef,
+				config
+			);
 	}
 
 	// HORIZONTAL BAR CHARTS (EMOTIONELE VERDELING PER WEBSITE)
@@ -624,47 +624,49 @@ class Graphs extends Component {
 		}]
 		};
 
-		const config = {
-			type: 'bar',
-			data: data,
-			options: {
-				plugins: {
-					legend: {
-					  display: false
-					},
-				},
-				indexAxis: 'y',
-				scales: {
-					y: {
-					beginAtZero: true,
-					grid: {
+		if(sentimentData.websiteCount[website].positive !== 0 && sentimentData.websiteCount[website].negative !== 0) {
+			const config = {
+				type: 'bar',
+				data: data,
+				options: {
+					plugins: {
+						legend: {
 						display: false
-					}
+						},
 					},
-					x: {
+					indexAxis: 'y',
+					scales: {
+						y: {
+						beginAtZero: true,
 						grid: {
 							display: false
 						}
+						},
+						x: {
+							grid: {
+								display: false
+							}
+						}
 					}
-				}
-			},
-		};
+				},
+			};
 
-		if(website === 'facebook') {
-			this.facebookChart = new Chart(
-				myChartRef,
-				config
-			);
-		} else if(website === 'reddit') {
-			this.redditChart = new Chart(
-				myChartRef,
-				config
-			);
-		} else if(website === 'twitter') {
-			this.twitterChart = new Chart(
-				myChartRef,
-				config
-			);
+			if(website === 'facebook') {
+				this.facebookChart = new Chart(
+					myChartRef,
+					config
+				);
+			} else if(website === 'reddit') {
+				this.redditChart = new Chart(
+					myChartRef,
+					config
+				);
+			} else if(website === 'twitter') {
+				this.twitterChart = new Chart(
+					myChartRef,
+					config
+				);
+			}
 		}
 	}
 }
