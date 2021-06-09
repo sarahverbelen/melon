@@ -10,7 +10,6 @@
 }
 
 #tips p {
-	
 	display: inline-block;
 	padding: 20px;
 	box-sizing: border-box;
@@ -25,11 +24,16 @@
 	margin-top: 60px;
 }
 
+#numbers {
+	display: flex;
+	z-index: 2;
+	margin-top: -42px;
+}
+
 .timeline-tip {
 	display: inline-block;
 	width: 24%;
 	align-items: center;
-	margin-top: -43px;
 }
 
 .tip-number {

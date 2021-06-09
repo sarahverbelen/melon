@@ -329,17 +329,19 @@ class Graphs extends Component {
 		return(
 		<section id='graphs'>
 			<div id='graphTop'>
-				<h2 className='graphTitle'>Grafieken</h2>
-				<div className='tooltip' id='insightsHelp'>?
-				<span className="tooltiptext">Een overzicht van de berichten die je gezien hebt. Rechts van deze titel kan je een tijdspanne selecteren om te bekijken. De negativiteit of positiviteit alsook de kernwoorden van de berichten is gebaseerd op de analyse van onze Artificiële Intelligentie.</span></div>
-				<div id='filter'>
-					<img src={arrowLeftRed} alt='terug' className='timeArrow' onClick={() => {this.mainSkip(-1)}}/>
-					<select name="filter" id='filterSelect' onChange={this.handleFilter} value={this.state.filter}>
-						<option value='day'>{this.state.day}</option>
-						<option value='month'>{this.state.month}</option>
-						<option value='year'>{this.state.year}</option>
-					</select>
-					<img src={this.state.arrowRight} alt='verder' className='timeArrow' onClick={this.continueFunction}/>
+				<div id='graphsTitle'>
+					<h2 className='graphTitle'>Grafieken</h2>
+					<div className='tooltip' id='insightsHelp'>?
+					<span className="tooltiptext">Een overzicht van de berichten die je gezien hebt. Rechts van deze titel kan je een tijdspanne selecteren om te bekijken. De negativiteit of positiviteit alsook de kernwoorden van de berichten is gebaseerd op de analyse van onze Artificiële Intelligentie.</span></div>
+					<div id='filter'>
+						<img src={arrowLeftRed} alt='terug' className='timeArrow' onClick={() => {this.mainSkip(-1)}}/>
+						<select name="filter" id='filterSelect' onChange={this.handleFilter} value={this.state.filter}>
+							<option value='day'>{this.state.day}</option>
+							<option value='month'>{this.state.month}</option>
+							<option value='year'>{this.state.year}</option>
+						</select>
+						<img src={this.state.arrowRight} alt='verder' className='timeArrow' onClick={this.continueFunction}/>
+					</div>
 				</div>
 			</div>
 			<div id='graphArea'>

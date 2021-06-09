@@ -15,7 +15,7 @@ function DashboardHelp() {
 			<h2>Hulp nodig?</h2>
 					<ul className='melonList'>
 						<li><a href='https://lumi.be/' target='_blank' rel="noreferrer"><span><u>Lumi.be</u>: voor al je vragen over gender en seksuele voorkeur</span> <img src={lumi} alt='lumi'/></a></li>
-						<li><a href='https://www.awel.be/' target='_blank' rel="noreferrer"><span><u>Awel.be</u>: luistert naar alle kinderen en jongeren met een probleem, vraag of verhaal</span> <img src={awel} alt='awel'/></a></li>
+						<li><a href='https://www.awel.be/' target='_blank' rel="noreferrer"><span><u>Awel.be</u>: luistert naar alle kinderen en jongeren met een probleem of vraag</span> <img src={awel} alt='awel'/></a></li>
 						<li><a href='https://www.caw.be/' target='_blank' rel="noreferrer"><span><u>Caw.be</u>: biedt hulp bij al je welzijnsvragen (volwassenen)</span> <img src={caw} alt='caw'/></a></li>
 						<li><a href='https://www.caw.be/jac/' target='_blank' rel="noreferrer"><span><u>Jac.be</u>: biedt hulp bij al je welzijnsvragen (jongeren)</span> <img src={jac} alt='jac'/></a></li>
 						<li><a href='https://mediawijs.be/' target='_blank' rel="noreferrer"><span><u>Mediawijs.be</u>: over bewust gebruik van digitale media</span> <img src={mediawijs} alt='mediawijs'/></a></li>

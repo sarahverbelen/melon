@@ -17,11 +17,17 @@
 
 .contactList{
 	padding: 0px;
+	display: flex;
+	flex-direction: column;
+}
+
+.contactList li {
+	display: flex;
+	margin-top: 25px;
 }
 
 .contactList img {
 	width: 50px;
-	margin-top: 10px;
 }
 
 .contactList a {
