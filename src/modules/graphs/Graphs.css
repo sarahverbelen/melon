@@ -101,6 +101,7 @@
 	width: 100px;
 	height: 100px;
 	margin-left: 100px;
+	z-index: 1;
 }
 
 #doughnutLoading {
