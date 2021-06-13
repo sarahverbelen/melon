@@ -136,7 +136,6 @@ class Graphs extends Component {
 				delete_cookie('auth_token');
 				window.location = '/login'
 			}
-			console.log(response);
 			this.setState({
 				facebookError: <div className='graphError' id='facebookError'>Er is iets misgegaan bij het ophalen van de data.</div>,
 				twitterError: <div className='graphError' id='twitterError'>Er is iets misgegaan bij het ophalen van de data.</div>,

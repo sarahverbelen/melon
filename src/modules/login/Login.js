@@ -56,7 +56,6 @@ class Login extends React.Component {
 
 	handleLogin(e) {
 		e.preventDefault();
-		console.log("login");
 
 		this.setState({error: false});
 		if(/^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/.test(this.state.email)){ // check if email is valid
@@ -73,12 +72,10 @@ class Login extends React.Component {
 					data: formData,
 					headers: { "Content-Type": "multipart/form-data", "Access-Control-Allow-Origin": "*" },
 				}).then(function (res) {
-					console.log(res);
 					bake_cookie('loggedIn', true);
 					bake_cookie('auth_token', res.data);
 					window.location = '/dashboard'
 				}).catch(function(err) {
-					// TODO: error handling, showing the user what's wrong
 					console.log(err)
 					this.setState({error: true});
 				}.bind(this));

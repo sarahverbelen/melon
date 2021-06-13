@@ -21,7 +21,6 @@ class Test extends React.Component {
 			this.setState({
 				test: response.data
 			})
-			console.log(response);
 		}.bind(this));
 	}
 

@@ -59,7 +59,6 @@ class Register extends React.Component {
 	}
 
 	handleRegister(e) {
-		console.log('register');
 		e.preventDefault();
 		this.setState({error: false});
 		this.setState({existingError: false});
@@ -82,7 +81,6 @@ class Register extends React.Component {
 							data: formData,
 							headers: { "Content-Type": "multipart/form-data" },
 						}).then(function (res) {
-							console.log(res);
 							bake_cookie('loggedIn', true);
 							bake_cookie('auth_token', res.data);
 							window.location = '/download'
